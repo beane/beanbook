@@ -36,7 +36,8 @@ no_friends = User.create!(
   last_name: "Person"
 )
 
-# create friendship
+
+# create friendships
 
 Friendship.create!(
   inbound_friend_id: brian.id,
