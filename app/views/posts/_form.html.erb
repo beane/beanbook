@@ -1,0 +1,22 @@
+<% if post.persisted? %>
+  <% action = user_post_url(current_user, post) %>
+  <% method = "PUT" %>
+<% else %>
+  <% action = user_posts_url(current_user) %>
+  <% method = "" %>
+<% end %>
+
+<form action="<%= action %>" method="POST">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
+  <input type="hidden" name="_method" value="<%= method %>">
+
+  <textarea
+    placeholder="Cold pizza is better than the Cold War. Discuss."
+    name="post[body]"><%= post.body %></textarea>
+
+  <input type="submit" value="Post!">
+</form>

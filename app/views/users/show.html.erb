@@ -1,0 +1,6 @@
+<% if logged_in? %>
+<!-- also need to check if we are friends -->
+  <%= render(partial: 'posts/form', locals: {post: Post.new()})%>
+<% end %>
+
+<%= render(partial: 'posts/index', locals: {wallposts: @wallposts}) %>

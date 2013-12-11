@@ -1,0 +1,13 @@
+<% wallposts.reverse.each do |post| %>
+  <div>
+    <% author = post.author %>
+    <%= author.first_name %>
+    <%= author.last_name %>:
+    <%= post.body %>
+    <%= post.created_at %>
+    <% if author == current_user %>
+      <a href="<%= edit_user_post_url(author, post) %>">Edit</a>
+      <%= button_to "Delete", user_post_url(current_user, post), method: :delete %>
+    <% end %>
+  </div>
+<% end %>
