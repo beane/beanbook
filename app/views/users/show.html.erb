@@ -1,6 +1,7 @@
-<% if logged_in? %>
-<!-- also need to check if we are friends -->
+<h2><%= @user.first_name %> <%= @user.last_name %>'s Page</h2>
+
+<% if logged_in? && current_user.is_friends_with?(params[:id].to_i) %>
   <%= render(partial: 'posts/form', locals: {post: Post.new()})%>
 <% end %>
 
-<%= render(partial: 'posts/index', locals: {wallposts: @wallposts}) %>
+<%= render(partial: 'posts/index', locals: {posts: @wallposts}) %>

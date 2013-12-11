@@ -1,14 +1,12 @@
 Beanbook::Application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
-  resources :users, only: [:new, :create, :show] do
+  resources :users, only: [:index, :new, :create, :show] do
     resources :posts, except: [:index, :new]
-    member do
-      # this doesn't work yet - need friend model
-      get :feed
-    end
+    resources :friends, only: :index
+    resources :friendships, only: [:create, :update, :destroy]
   end
 
-  # eventually change to the current user's feed
-  # hmmm....
-  root to: "users#show"
+  resource :feed, only: :show
+
+  root to: "feeds#show"
 end

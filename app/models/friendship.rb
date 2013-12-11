@@ -2,6 +2,7 @@ class Friendship < ActiveRecord::Base
   attr_accessible :inbound_friend_id, :outbound_friend_id
 
   validates :inbound_friend_id, :outbound_friend_id, presence: true
+  validates :inbound_friend_id, uniqueness: {scope: :outbound_friend_id}
   validates :pending, inclusion: {in: [true, false]}
 
   before_save :complete_friendship
@@ -23,7 +24,6 @@ class Friendship < ActiveRecord::Base
   private
 
     def complete_friendship
-      # should happen in a transaction?
       friendship = Friendship
         .find_by_inbound_friend_id_and_outbound_friend_id(
           self.outbound_friend_id,
@@ -32,7 +32,7 @@ class Friendship < ActiveRecord::Base
 
       if friendship && friendship.pending
         friendship.pending = false
-        friendship.save # should i rescue errors here?
+        friendship.save
         self.pending = false
       end
 

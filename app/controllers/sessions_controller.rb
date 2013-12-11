@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if user
       log_in(user)
       flash[:notice] = ["Thanks for logging in!"]
-      redirect_to user_url(user)
+      redirect_to root_url
     else
       flash[:errors] = ["Log in failed: You shall not pass!"]
       redirect_to new_session_url

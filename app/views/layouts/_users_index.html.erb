@@ -1,0 +1,16 @@
+<% users.each do |user| %>
+  <% if user.is_friends_with?(current_user.id) %>
+  <!-- button to unfriend -->
+
+  <!-- else if user is a pending friend? -->
+  <!-- button to complete or reject -->
+  <% else %>
+    <!-- button to friend -->
+  <% end %>
+
+  <span>
+    <%= user.first_name %>
+    <%= user.last_name %>
+    <%= button_to "Stuff", user_friends_url(current_user), method: :delete %>
+  </span>
+<% end %>

@@ -46,7 +46,21 @@ class User < ActiveRecord::Base
     conditions: "friendships.pending IS false"
   )
 
+  # doesn't show posts you made... good or bad? YOU decide!
+  has_many(
+    :feed_posts,
+    through: :friends,
+    source: :authored_posts
+  )
+
   # authentication
+
+  def is_friends_with?(user_id)
+    return true if user_id == self.id
+    friendship = Friendship
+      .find_by_inbound_friend_id_and_outbound_friend_id(self.id, user_id)
+    !!friendship && !friendship.pending
+  end
 
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email);
