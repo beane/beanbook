@@ -59,6 +59,12 @@ Friendship.create!(
   outbound_friend_id: margaret.id
 )
 
+# plan to use this friend to check pending features
+Friendship.create!(
+  inbound_friend_id: brian.id,
+  outbound_friend_id: no_friends.id
+)
+
 # create posts
 
 dbz = Post.create!(

@@ -6,7 +6,12 @@
     name="authenticity_token"
     value="<%= form_authenticity_token %>">
 
-  <input type="text" name="user[email]">
-  <input type="password" name="user[password]">
+  <label>Email:
+    <input type="text" name="user[email]">
+  </label>
+
+  <label>Password:
+    <input type="password" name="user[password]">
+  </label>
   <input type="submit" value="Log In!">
 </form>

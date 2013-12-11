@@ -46,6 +46,8 @@ class User < ActiveRecord::Base
     conditions: "friendships.pending IS false"
   )
 
+  # authentication
+
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email);
     return nil unless user
