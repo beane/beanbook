@@ -5,6 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# create users
+
 brian = User.create!(
   email: "bean@beanbook.io",
   password: "password",
@@ -25,6 +28,37 @@ margaret = User.create!(
   first_name: "Margaret",
   last_name: "Atwood"
 )
+
+no_friends = User.create!(
+  email: "sad@sad.com",
+  password: "password",
+  first_name: "Sad",
+  last_name: "Person"
+)
+
+# create friendship
+
+Friendship.create!(
+  inbound_friend_id: brian.id,
+  outbound_friend_id: goku.id
+)
+
+Friendship.create!(
+  inbound_friend_id: goku.id,
+  outbound_friend_id: brian.id
+)
+
+Friendship.create!(
+  inbound_friend_id: margaret.id,
+  outbound_friend_id: brian.id
+)
+
+Friendship.create!(
+  inbound_friend_id: brian.id,
+  outbound_friend_id: margaret.id
+)
+
+# create posts
 
 dbz = Post.create!(
   author_id: brian.id,

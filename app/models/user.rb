@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   validates :password_digest, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
-  validates :email, presence: true
+  validates :email, presence: true, uniqueness: true
 
   has_many(
     :wallposts,
@@ -23,6 +23,27 @@ class User < ActiveRecord::Base
     class_name: "Post",
     foreign_key: :author_id,
     primary_key: :id
+  )
+
+  has_many(
+    :inbound_friendships,
+    class_name: "Friendship",
+    foreign_key: :inbound_friend_id,
+    primary_key: :id
+  )
+
+  has_many(
+    :outbound_friendships,
+    class_name: "Friendship",
+    foreign_key: :outbound_friend_id,
+    primary_key: :id
+  )
+
+  has_many(
+    :friends,
+    through: :outbound_friendships,
+    source: :inbound_friend,
+    conditions: "friendships.pending IS false"
   )
 
   def self.find_by_credentials(email, password)

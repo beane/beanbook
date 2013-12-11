@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  inbound_friend_id: 1
+  outbound_friend_id: 1
+  pending: false
+
+two:
+  inbound_friend_id: 1
+  outbound_friend_id: 1
+  pending: false

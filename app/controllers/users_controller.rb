@@ -19,4 +19,9 @@ class UsersController < ApplicationController
     @wallposts = @user.wallposts.order(:created_at)
     render :show
   end
+
+  def feed
+    # need friendships first
+    render :feed
+  end
 end

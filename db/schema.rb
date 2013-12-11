@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131211160444) do
+ActiveRecord::Schema.define(:version => 20131211203338) do
+
+  create_table "friendships", :force => true do |t|
+    t.integer  "inbound_friend_id",                    :null => false
+    t.integer  "outbound_friend_id",                   :null => false
+    t.boolean  "pending",            :default => true, :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+  end
+
+  add_index "friendships", ["inbound_friend_id", "outbound_friend_id"], :name => "index_friendships_on_inbound_friend_id_and_outbound_friend_id", :unique => true
+  add_index "friendships", ["inbound_friend_id", "pending"], :name => "index_friendships_on_inbound_friend_id_and_pending"
 
   create_table "posts", :force => true do |t|
     t.integer  "author_id",    :null => false
@@ -35,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20131211160444) do
     t.datetime "updated_at",      :null => false
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["session_token"], :name => "index_users_on_session_token"
 
 end
