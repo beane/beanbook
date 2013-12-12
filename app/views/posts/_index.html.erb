@@ -3,7 +3,7 @@
     <% author = post.author %>
 
     <a href="<%= user_url(author) %>">
-      <%= image_tag author.profile_photo.url(:small) %>
+      <%= image_tag author.profile_photo.photo_file.url(:small) if author.profile_photo %>
       <%= author.first_name %>
       <%= author.last_name %></a>:
 

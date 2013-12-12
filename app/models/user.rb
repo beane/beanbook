@@ -2,21 +2,20 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   include SecureRandom
 
-  attr_accessible :email, :password, :first_name, :last_name, :profile_photo
+  attr_accessible :email, :password, :first_name, :last_name, :profile_photo_id
   attr_reader :password
 
   before_validation :generate_session_token
 
-  validates :password_digest, presence: true
+  validates :password_digest, :first_name, :last_name, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :email, presence: true, uniqueness: true
 
-
-  # eventually move to photo model
-  has_attached_file :profile_photo, :styles => {
-    :big => "400X400>",
-    :small => "100x100#"
-  }
+  belongs_to(
+    :profile_photo,
+    class_name: "Photo",
+    foreign_key: :profile_photo_id
+  )
 
   has_many(
     :photos,
@@ -107,7 +106,7 @@ class User < ActiveRecord::Base
   end
 
   def generate_session_token
-    self.session_token = SecureRandom.urlsafe_base64(16)
+    self.session_token ||= SecureRandom.urlsafe_base64(16)
   end
 
   def reset_session_token!

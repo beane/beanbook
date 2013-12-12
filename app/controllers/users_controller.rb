@@ -28,4 +28,14 @@ class UsersController < ApplicationController
     @wallposts = @user.wallposts.order(:created_at)
     render :show
   end
+
+  def update
+    user = current_user
+    if user.update_attributes(params[:user])
+      flash[:notice] = ["You have a new profile picture!"]
+    else
+      flash[:errors] = user.errors.full_messages
+    end
+    redirect_to user_url(user)
+  end
 end

@@ -9,4 +9,10 @@ class Photo < ActiveRecord::Base
   }
 
   belongs_to :user
+
+  has_many(
+    :profile_uses,
+    class_name: "User",
+    foreign_key: :profile_picture_id
+  )
 end

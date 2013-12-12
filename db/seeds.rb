@@ -12,24 +12,21 @@ brian = User.create!(
   email: "bean@beanbook.io",
   password: "password",
   first_name: "Brian",
-  last_name: "Deane",
-  profile_photo: File.open(File.expand_path("./app/assets/images/profile_photos/beach.jpeg"))
+  last_name: "Deane"
 )
 
 goku = User.create!(
   email: "goku@beanbook.io",
   password: "password",
   first_name: "Son",
-  last_name: "Goku",
-  profile_photo: File.open(File.expand_path("./app/assets/images/profile_photos/flowers.jpeg"))
+  last_name: "Goku"
 )
 
 margaret = User.create!(
   email: "margaret@beanbook.io",
   password: "password",
   first_name: "Margaret",
-  last_name: "Atwood",
-  profile_photo: File.open(File.expand_path("./app/assets/images/profile_photos/space-hubble-2010_1622267i.jpg"))
+  last_name: "Atwood"
 )
 
 m = User.create!(
@@ -113,14 +110,38 @@ brian_status = Post.create!(
 
 # create photos
 
-Photo.create!(
+beach = Photo.create!(
   photo_file: File.open(File.expand_path("./app/assets/images/profile_photos/beach.jpeg")),
   user_id: brian.id,
   caption: "This is a great shot!"
 )
 
-Photo.create!(
+flowers = Photo.create!(
   photo_file: File.open(File.expand_path("./app/assets/images/profile_photos/flowers.jpeg")),
   user_id: brian.id,
   caption: "Whoa!"
 )
+burger =  Photo.create!(
+  photo_file: File.open(File.expand_path("./app/assets/images/profile_photos/burger.jpeg")),
+  user_id: goku.id,
+  caption: "Dude!"
+)
+
+portal = Photo.create!(
+  photo_file: File.open(File.expand_path("./app/assets/images/profile_photos/e9cc_portal_bookends_closeup.jpg")),
+  user_id: margaret.id,
+  caption: "Beautiful"
+)
+
+space = Photo.create!(
+  photo_file: File.open(File.expand_path("./app/assets/images/profile_photos/space-hubble-2010_1622267i.jpg")),
+  user_id: brian.id,
+  caption: "I wonder how this happened..."
+)
+
+brian.profile_photo_id = beach.id
+brian.save
+goku.profile_photo_id = burger.id
+goku.save
+margaret.profile_photo_id = space.id
+margaret.save
