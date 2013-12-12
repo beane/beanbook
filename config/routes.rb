@@ -4,7 +4,7 @@ Beanbook::Application.routes.draw do
     resources :posts, except: [:index, :new]
     resources :friends, only: :index
     resources :friendships, only: [:create, :update, :destroy]
-    resources :photos, only: [:index, :show, :create, :update]
+    resources :photos
   end
 
   resource :feed, only: :show
