@@ -24,4 +24,11 @@ class PhotosController < ApplicationController
       redirect_to user_photo_url(params[:user_id], photo)
     end
   end
+
+  def destroy
+    photo = Photo.find(params[:id])
+    photo.destroy
+    flash[:notice] = ["Photo deleted"]
+    redirect_to user_photos_url(params[:user_id])
+  end
 end
