@@ -4,7 +4,7 @@ class FriendshipsController < ApplicationController
     friendship.inbound_friend_id = params[:user_id]
     friendship.outbound_friend_id = current_user.id
     if friendship.save
-      flash[:notice] = ["You have a new friend!"]
+      flash[:notice] = ["You did your part!"]
       redirect_to user_url(params[:user_id])
     else
       flash[:errors] = friendship.errors.full_messages

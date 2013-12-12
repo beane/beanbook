@@ -1,8 +1,11 @@
 <% posts.reverse.each do |post| %>
   <div>
     <% author = post.author %>
-    <%= author.first_name %>
-    <%= author.last_name %>:
+
+    <a href="<%= user_url(author) %>">
+      <%= author.first_name %>
+      <%= author.last_name %></a>:
+
     <%= post.body %>
     <%= post.created_at %>
     <% if author == current_user %>
