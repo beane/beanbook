@@ -1,7 +1,7 @@
 class FeedsController < ApplicationController
   def show
-    # excludes current_user's posts
-    @feed_posts = current_user.feed_posts.order(:created_at)
+    # sloppily includes the user's posts
+    @feed_posts = (current_user.wallposts + current_user.authored_posts).sort.uniq
     render :feed
   end
 end
