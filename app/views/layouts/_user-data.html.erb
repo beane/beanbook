@@ -2,7 +2,7 @@
 <% if logged_in? %>
   Hello, <a href="<%= user_url(current_user) %>"><%= current_user.first_name %>!</a>
   <a href="<%= root_url %>">Feed</a>
-  <a href="<%= user_friends_url(current_user) %>">Friends</a>
+  <a href="<%= user_friends_url(current_user) %>">Your Friends</a>
   <a href="<%= users_url %>">Find New Friends</a>
   <%= button_to "Log out", session_url, method: :delete %>
 <% else %>

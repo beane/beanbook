@@ -23,6 +23,7 @@
 
     <li>
       <a href="<%= user_url(user) %>">
+        <%= image_tag user.profile_photo.url(:small) %>
         <%= user.first_name %>
         <%= user.last_name %>
         <%= button %>

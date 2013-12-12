@@ -12,28 +12,32 @@ brian = User.create!(
   email: "bean@beanbook.io",
   password: "password",
   first_name: "Brian",
-  last_name: "Deane"
+  last_name: "Deane",
+  profile_photo: File.open(File.expand_path("./app/assets/images/profile_photos/beach.jpeg"))
 )
 
 goku = User.create!(
   email: "goku@beanbook.io",
   password: "password",
   first_name: "Son",
-  last_name: "Goku"
+  last_name: "Goku",
+  profile_photo: File.open(File.expand_path("./app/assets/images/profile_photos/flowers.jpeg"))
 )
 
 margaret = User.create!(
   email: "margaret@beanbook.io",
   password: "password",
   first_name: "Margaret",
-  last_name: "Atwood"
+  last_name: "Atwood",
+  profile_photo: File.open(File.expand_path("./app/assets/images/profile_photos/space-hubble-2010_1622267i.jpg"))
 )
 
 m = User.create!(
   email: "m",
   password: "password",
   first_name: "James",
-  last_name: "Bond"
+  last_name: "Bond",
+  profile_photo: File.open(File.expand_path("./app/assets/images/profile_photos/beach.jpeg"))
 )
 
 no_friends = User.create!(
@@ -42,7 +46,6 @@ no_friends = User.create!(
   first_name: "Sad",
   last_name: "Person"
 )
-
 
 # create friendships
 

@@ -11,10 +11,17 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :email, presence: true, uniqueness: true
 
+
+  # eventually move to photo model
   has_attached_file :profile_photo, :styles => {
     :big => "400X400>",
     :small => "100x100#"
   }
+
+  # has_attached_file :profile_file, :styles => {
+  #   :big => "400X400>",
+  #   :small => "100x100#"
+  # }
 
   has_many(
     :wallposts,
