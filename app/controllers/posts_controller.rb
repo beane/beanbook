@@ -4,7 +4,8 @@ class PostsController < ApplicationController
     post.author_id = current_user.id
     post.recipient_id = params[:user_id]
     if post.save
-      render json: post
+      # render json: post
+      redirect_to user_url(params[:user_id])
     else
       flash[:errors] = post.errors.full_messages
       # what to send back?
