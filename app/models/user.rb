@@ -18,10 +18,11 @@ class User < ActiveRecord::Base
     :small => "100x100#"
   }
 
-  # has_attached_file :profile_file, :styles => {
-  #   :big => "400X400>",
-  #   :small => "100x100#"
-  # }
+  has_many(
+    :photos,
+    class_name: "Photo",
+    foreign_key: :user_id
+  )
 
   has_many(
     :wallposts,

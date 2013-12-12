@@ -36,8 +36,7 @@ m = User.create!(
   email: "m",
   password: "password",
   first_name: "James",
-  last_name: "Bond",
-  profile_photo: File.open(File.expand_path("./app/assets/images/profile_photos/beach.jpeg"))
+  last_name: "Bond"
 )
 
 no_friends = User.create!(
@@ -110,4 +109,18 @@ brian_status = Post.create!(
   author_id: brian.id,
   recipient_id: brian.id,
   body: "Boy do I wish more people used beanbook."
+)
+
+# create photos
+
+Photo.create!(
+  photo_file: File.open(File.expand_path("./app/assets/images/profile_photos/beach.jpeg")),
+  user_id: brian.id,
+  caption: "This is a great shot!"
+)
+
+Photo.create!(
+  photo_file: File.open(File.expand_path("./app/assets/images/profile_photos/flowers.jpeg")),
+  user_id: brian.id,
+  caption: "Whoa!"
 )

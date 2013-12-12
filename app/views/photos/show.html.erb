@@ -1,0 +1,4 @@
+<h3>View Photo</h3>
+<%= image_tag @photo.photo_file.url(:big) %>
+<%= @photo.caption %>
+<a href="<%= user_photos_url(params[:user_id]) %>">Back to Photos</a>

@@ -1,0 +1,4 @@
+<% @photos.each do |photo| %>
+  <a href="<%= user_photo_url(params[:user_id], photo.id) %>"><%= image_tag photo.photo_file.url(:small) %></a>
+  <%= photo.caption %>
+<% end %>

@@ -1,7 +1,7 @@
 class CreatePhotos < ActiveRecord::Migration
   def change
     create_table :photos do |t|
-      t.attachment :photo_file, null: false
+      t.attachment :photo_file
       t.integer :user_id, null: false
       t.string :caption
 
