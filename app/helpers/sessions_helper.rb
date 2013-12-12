@@ -20,4 +20,8 @@ module SessionsHelper
   def authenticate
     redirect_to new_session_url unless logged_in?
   end
+
+  def prevent_creation_when_logged_in
+    redirect_to root_url if logged_in?
+  end
 end

@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_filter :authenticate, only: [:create, :new]
+  before_filter :prevent_creation_when_logged_in, only: :new # maybe also create?
 
   def create
     user = User.find_by_credentials(

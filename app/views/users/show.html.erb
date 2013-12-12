@@ -1,4 +1,5 @@
-<h2><%= @user.first_name %> <%= @user.last_name %>'s Page</h2>
+<%= image_tag @user.profile_photo.url(:big) %>
+<h2> <%= @user.first_name %> <%= @user.last_name %>'s Page</h2>
 
 <% if logged_in? && current_user.is_friends_with?(params[:id].to_i) %>
   <%= render(partial: 'posts/form', locals: {post: Post.new(), user: User.find(params[:id])})%>

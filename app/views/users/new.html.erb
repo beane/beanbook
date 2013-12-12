@@ -1,10 +1,19 @@
 <h2>Create a New Account</h2>
 
-<form action="<%= users_url %>" method="POST">
+<form action="<%= users_url %>" method="POST" enctype="multipart/form-data">
   <input
     type="hidden"
     name="authenticity_token"
     value="<%= form_authenticity_token %>">
+
+
+  <label>First Name:
+    <input type="text" name="user[first_name]">
+  </label>
+
+  <label>Last Name:
+    <input type="text" name="user[last_name]">
+  </label>
 
   <label>Email:
     <input type="text" name="user[email]">
@@ -13,5 +22,10 @@
   <label>Password:
     <input type="password" name="user[password]">
   </label>
+
+  <label>Profile Photo (optional):
+    <input type="file" name="user[profile_photo]">
+  </label>
+
   <input type="submit" value="Sign Up!">
 </form>

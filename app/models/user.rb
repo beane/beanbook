@@ -2,7 +2,7 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   include SecureRandom
 
-  attr_accessible :email, :password, :first_name, :last_name
+  attr_accessible :email, :password, :first_name, :last_name, :profile_photo
   attr_reader :password
 
   before_validation :generate_session_token
@@ -10,6 +10,11 @@ class User < ActiveRecord::Base
   validates :password_digest, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :email, presence: true, uniqueness: true
+
+  has_attached_file :profile_photo, :styles => {
+    :big => "400X400>",
+    :small => "100x100#"
+  }
 
   has_many(
     :wallposts,
@@ -66,18 +71,6 @@ class User < ActiveRecord::Base
     source: :outbound_friend,
     conditions: "friendships.pending IS true"
   )
-
-  # there are the requests i have recieved
-  # has_many(
-  #   :pending_friends,
-  #   through: :outbound_pending_friendships,
-  #   source: :
-  # )
-  #
-  # # these are the requests i have sent
-  # has_many(
-  #   :awaited_friends
-  # )
 
   def is_friends_with?(user_id)
     return true if user_id == self.id

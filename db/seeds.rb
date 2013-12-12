@@ -29,6 +29,13 @@ margaret = User.create!(
   last_name: "Atwood"
 )
 
+m = User.create!(
+  email: "m",
+  password: "password",
+  first_name: "James",
+  last_name: "Bond"
+)
+
 no_friends = User.create!(
   email: "sad@sad.com",
   password: "password",
@@ -63,6 +70,11 @@ Friendship.create!(
 Friendship.create!(
   inbound_friend_id: brian.id,
   outbound_friend_id: no_friends.id
+)
+
+Friendship.create!(
+  inbound_friend_id: m.id,
+  outbound_friend_id: brian.id
 )
 
 # create posts
