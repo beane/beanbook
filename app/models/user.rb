@@ -52,6 +52,31 @@ class User < ActiveRecord::Base
     through: :friends,
     source: :authored_posts
   )
+  has_many(
+    :outbound_pending_friendships,
+    through: :outbound_friendships,
+    source: :inbound_friend,
+    conditions: "friendships.pending IS true"
+  )
+
+  has_many(
+    :inbound_pending_friendships,
+    through: :inbound_friendships,
+    source: :outbound_friend,
+    conditions: "friendships.pending IS true"
+  )
+
+  # there are the requests i have recieved
+  # has_many(
+  #   :pending_friends,
+  #   through: :outbound_pending_friendships,
+  #   source: :
+  # )
+  #
+  # # these are the requests i have sent
+  # has_many(
+  #   :awaited_friends
+  # )
 
   def is_friends_with?(user_id)
     return true if user_id == self.id

@@ -1,8 +1,8 @@
 <% if post.persisted? %>
-  <% action = user_post_url(current_user, post) %>
+  <% action = user_post_url(user, post) %>
   <% method = "PUT" %>
 <% else %>
-  <% action = user_posts_url(current_user) %>
+  <% action = user_posts_url(user) %>
   <% method = "" %>
 <% end %>
 

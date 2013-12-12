@@ -1,2 +1,2 @@
 <h3>Edit your post</h3>
-<%= render(partial: 'posts/form', locals: {post: @post}) %>
+<%= render(partial: 'posts/form', locals: {post: @post, user: User.find(@post.recipient_id)}) %>

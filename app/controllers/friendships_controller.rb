@@ -13,7 +13,21 @@ class FriendshipsController < ApplicationController
     end
   end
 
-  def updates
+  # handles pending requests
+  def update
+    friendship = Friendship.find(params[:id])
+    new_friendship = Friendship.new(
+      inbound_friend_id: friendship.outbound_friend_id,
+      outbound_friend_id: friendship.inbound_friend_id
+    )
+
+    if new_friendship.save
+      flash[:notice] = ["You have a new friend!"]
+      redirect_to user_url(new_friendship.inbound_friend_id)
+    else
+      flash[:errors] = new_friendship.errors.full_messages
+      redirect_to user_friends_url(current_user)
+    end
   end
 
   def destroy
