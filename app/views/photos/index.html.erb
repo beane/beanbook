@@ -1,4 +1,4 @@
-<h3>View Photos</h3>
+<h3>View <%= User.find(params[:user_id]).first_name %>'s Photos</h3>
 <% @photos.each do |photo| %>
   <a href="<%= user_photo_url(params[:user_id], photo.id) %>"><%= image_tag photo.photo_file.url(:small) %></a>
   <%= photo.caption %>

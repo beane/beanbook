@@ -1,6 +1,8 @@
 <h3>View Photo</h3>
 <%= image_tag @photo.photo_file.url(:big) %>
 <%= @photo.caption %>
-<%= button_to "Delete Photo", user_photo_url(params[:user_id], @photo), method: :delete %>
+<% if params[:user_id] == current_user.id %>
+  <%= button_to "Delete Photo", user_photo_url(params[:user_id], @photo), method: :delete %>
+  <a href="<%= edit_user_photo_url(params[:user_id], @photo) %>">Edit Photo</a>
+<% end %>
 <a href="<%= user_photos_url(params[:user_id]) %>">Back to Photos</a>
-<a href="<%= edit_user_photo_url(params[:user_id], @photo) %>">Edit Photo</a>
