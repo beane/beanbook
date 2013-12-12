@@ -5,6 +5,7 @@ Beanbook::Application.routes.draw do
     resources :friends, only: :index
     resources :friendships, only: [:create, :update, :destroy]
     resources :photos
+    resources :tags, only: [:index, :create, :destroy]
   end
 
   resource :feed, only: :show

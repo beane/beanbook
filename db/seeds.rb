@@ -55,10 +55,10 @@ Friendship.create!(
   outbound_friend_id: brian.id
 )
 
-Friendship.create!(
-  inbound_friend_id: margaret.id,
-  outbound_friend_id: brian.id
-)
+# Friendship.create!(
+#   inbound_friend_id: margaret.id,
+#   outbound_friend_id: brian.id
+# )
 
 Friendship.create!(
   inbound_friend_id: brian.id,
@@ -84,11 +84,11 @@ dbz = Post.create!(
   body: "Save us, Goku!"
 )
 
-books = Post.create!(
-  author_id: brian.id,
-  recipient_id: margaret.id,
-  body: "Why don't you have a real Facebook account?"
-)
+# books = Post.create!(
+#   author_id: brian.id,
+#   recipient_id: margaret.id,
+#   body: "Why don't you have a real Facebook account?"
+# )
 
 super_saiyan = Post.create!(
   author_id: goku.id,
@@ -96,11 +96,11 @@ super_saiyan = Post.create!(
   body: "I am the alpha and the omega! I am the bacon in the fridge for all mankind!"
 )
 
-response = Post.create!(
-  author_id: margaret.id,
-  recipient_id: brian.id,
-  body: "Because being rich and famous gets old after a while."
-)
+# response = Post.create!(
+#   author_id: margaret.id,
+#   recipient_id: brian.id,
+#   body: "Because being rich and famous gets old after a while."
+# )
 
 brian_status = Post.create!(
   author_id: brian.id,
@@ -143,27 +143,31 @@ space = Photo.create!(
 
 brian.profile_photo_id = beach.id
 brian.save!
+
 goku.profile_photo_id = burger.id
 goku.save!
+
 margaret.profile_photo_id = space.id
 margaret.save!
+
 m.profile_photo_id = flowers.id
 m.save!
+
 no_friends.profile_photo_id = portal.id
 no_friends.save!
 
 # create a few tags
 
 Tag.create!(
-  taggable_type: "Post",
-  taggable_id: Post.first.id,
+  taggable_type: "Photo",
+  taggable_id: Photo.last.id,
   tagger_id: goku.id,
   taggee_id: brian.id
 )
 
 Tag.create!(
-  taggable_type: "Post",
-  taggable_id: Post.first.id,
+  taggable_type: "Photo",
+  taggable_id: Photo.first.id,
   tagger_id: goku.id,
   taggee_id: margaret.id
 )

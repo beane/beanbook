@@ -1,0 +1,12 @@
+<form action="<%= user_tags_url(params[:user_id]) %>" method="POST">
+
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
+  <input type="hidden" name="tag[taggee_id]" value="<%= friend.id %>">
+  <input type="hidden" name="tag[taggable_id]" value="<%= params[:id] %>">
+  <input type="hidden" name="tag[taggable_type]" value="<%= klass.to_s %>">
+  <input type="submit" value="Tag <%= friend.first_name %>">
+</form>

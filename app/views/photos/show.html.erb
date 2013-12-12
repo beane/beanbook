@@ -8,6 +8,21 @@
   <a href="<%= edit_user_photo_url(params[:user_id], @photo) %>">Edit Photo</a>
 <% end %>
 
+<%= render(partial: 'tags/tagged_users', locals: {object: @photo}) %>
+
+<h3>Tag Your Friends</h3>
+<ul>
+  <% tagged_users = @photo.tagged_users %>
+  <% (current_user.friends + [current_user]).each do |friend| %>
+    <% next if tagged_users.include?(friend) %>
+
+    <li>
+      <%= render(partial: 'tags/form', locals: {friend: friend, klass: Photo}) %>
+    </li>
+
+  <% end %>
+</ul>
+
 <form action="<%= user_url(current_user) %>" method="POST">
 
   <input type="hidden" name="_method" value="PUT">

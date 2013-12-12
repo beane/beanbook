@@ -4,6 +4,7 @@
   <a href="<%= root_url %>">Feed</a>
   <a href="<%= user_friends_url(current_user) %>">Your Friends</a>
   <a href="<%= users_url %>">Find New Friends</a>
+  <a href="<%= user_tags_url(current_user) %>">Your Tags</a>
   <a href="<%= user_photos_url(current_user) %>">Your Photos</a>
   <a href="<%= new_user_photo_url(current_user) %>">Upload a New Photo</a>
   <%= button_to "Log out", session_url, method: :delete %>

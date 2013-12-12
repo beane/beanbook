@@ -1,17 +1,16 @@
-<% posts.reverse.each do |post| %>
-  <div>
-    <% author = post.author %>
+<ul>
+  <% posts.reverse.each do |post| %>
+    <li>
+      <% author = post.author %>
+      <%= render(partial: 'users/preview', locals: {user: author}) %>
 
-    <a href="<%= user_url(author) %>">
-      <%= image_tag author.profile_photo.photo_file.url(:small) if author.profile_photo %>
-      <%= author.first_name %>
-      <%= author.last_name %></a>:
+      <%= post.body %>
+      <%= post.created_at %>
+      <% if author == current_user %>
+        <a href="<%= edit_user_post_url(author, post) %>">Edit</a>
+        <%= button_to "Delete", user_post_url(current_user, post), method: :delete %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
 
-    <%= post.body %>
-    <%= post.created_at %>
-    <% if author == current_user %>
-      <a href="<%= edit_user_post_url(author, post) %>">Edit</a>
-      <%= button_to "Delete", user_post_url(current_user, post), method: :delete %>
-    <% end %>
-  </div>
-<% end %>

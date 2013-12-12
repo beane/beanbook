@@ -1,0 +1,14 @@
+<h3>Places You've Been Tagged</h3>
+<ul>
+  <% User.find(params[:user_id]).tags.each do |tag| %>
+    <% taggable = tag.taggable %>
+    <li>
+      <!-- FOR NOW THIS IS JUST A PHOTO - IT WILL CAUSE PROBLEMS LATER -->
+      <!-- I can have a conditional that checks for the url depending on the class -->
+      <a href="<%= user_photo_url(taggable.user_id, taggable.id) %>">
+        <%= taggable.class %>
+        <%= taggable.id %>
+      </a>
+    </li>
+  <% end %>
+</ul>
