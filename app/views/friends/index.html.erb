@@ -4,7 +4,7 @@
 <%= render(partial: 'layouts/users_index', locals: {users: @friends}) %>
 
 <h3>Requests Awaiting Your Approval</h3>
-<%= render(partial: 'layouts/users_index', locals: {users: @friends}) %>
+<%= render(partial: 'layouts/users_index', locals: {users: current_user.inbound_pending_friends}) %>
 
 <h3>Pending Requests</h3>
-<%= render(partial: 'layouts/users_index', locals: {users: @friends}) %>
+<%= render(partial: 'layouts/users_index', locals: {users: current_user.outbound_pending_friends}) %>

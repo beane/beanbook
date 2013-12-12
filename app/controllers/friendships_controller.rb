@@ -4,7 +4,7 @@ class FriendshipsController < ApplicationController
     friendship.inbound_friend_id = params[:user_id]
     friendship.outbound_friend_id = current_user.id
     if friendship.save
-      flash[:notice] = ["You did your part!"]
+      flash[:notice] = ["Friend request sent!"]
       redirect_to user_url(params[:user_id])
     else
       flash[:errors] = friendship.errors.full_messages
@@ -44,6 +44,12 @@ class FriendshipsController < ApplicationController
       # how can i raise and rescue errors?
       friendship1.destroy
       friendship2.destroy
+      redirect_to user_friends_url(current_user)
+    elsif friendship1
+      friendship1.destroy
+      redirect_to user_friends_url(current_user)
+    elsif friendship2
+      friendship2.destory
       redirect_to user_friends_url(current_user)
     else
       flash[:errors] = ["We're sorry: something went wrong"]

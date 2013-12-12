@@ -8,12 +8,14 @@
     <% if current_user.is_friends_with?(user.id) %>
       <% button = button_to "Unfriend", user_friendship_url(current_user, friendship.id), method: :delete %>
 
-    <% elsif current_user.inbound_pending_friendships.include?(user) %>
+    <% elsif current_user.inbound_pending_friends.include?(user) %>
       <% button = button_to "Accept", user_friendship_url(current_user, friendship.id), method: :put %>
-      <% other_button = button_to "Deny" %>
+      <% other_button = button_to "Deny", user_friendship_url(current_user, friendship.id), method: :delete %>
 
-    <% elsif current_user.outbound_pending_friendships.include?(user) %>
+    <% elsif current_user.outbound_pending_friends.include?(user) %>
+      <% friendship = Friendship.find_by_inbound_friend_id_and_outbound_friend_id(user.id, current_user.id) %>
       <% button = button_to "Waiting for other user!" %>
+      <% other_button = button_to "Cancel Request", user_friendship_url(current_user, friendship.id), method: :delete %>
 
     <% else %>
       <% button = button_to "Friend", user_friendships_url(user), method: :post %>
