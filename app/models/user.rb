@@ -11,6 +11,18 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :email, presence: true, uniqueness: true
 
+  has_many(
+    :tags,
+    class_name: "Tag",
+    foreign_key: :taggee_id
+  )
+
+  has_many(
+    :outbound_tags,
+    class_name: "Tag",
+    foreign_key: :tagger_id
+  )
+
   belongs_to(
     :profile_photo,
     class_name: "Photo",

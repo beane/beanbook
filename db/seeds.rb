@@ -139,9 +139,38 @@ space = Photo.create!(
   caption: "I wonder how this happened..."
 )
 
+# create profile pictures
+
 brian.profile_photo_id = beach.id
-brian.save
+brian.save!
 goku.profile_photo_id = burger.id
-goku.save
+goku.save!
 margaret.profile_photo_id = space.id
-margaret.save
+margaret.save!
+m.profile_photo_id = flowers.id
+m.save!
+no_friends.profile_photo_id = portal.id
+no_friends.save!
+
+# create a few tags
+
+Tag.create!(
+  taggable_type: "Post",
+  taggable_id: Post.first.id,
+  tagger_id: goku.id,
+  taggee_id: brian.id
+)
+
+Tag.create!(
+  taggable_type: "Post",
+  taggable_id: Post.first.id,
+  tagger_id: goku.id,
+  taggee_id: margaret.id
+)
+
+Tag.create!(
+  taggable_type: "Photo",
+  taggable_id: Photo.first.id,
+  tagger_id: goku.id,
+  taggee_id: brian.id
+)

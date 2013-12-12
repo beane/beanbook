@@ -10,9 +10,18 @@ class Photo < ActiveRecord::Base
 
   belongs_to :user
 
+  # this might be broken
+  # has_many(
+  #   :profile_uses,
+  #   class_name: "User",
+  #   foreign_key: :profile_picture_id
+  # )
+
+  has_many :tags, as: :taggable
+
   has_many(
-    :profile_uses,
-    class_name: "User",
-    foreign_key: :profile_picture_id
+    :tagged_users,
+    through: :tags,
+    source: :taggee
   )
 end

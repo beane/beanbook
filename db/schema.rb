@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131212193549) do
+ActiveRecord::Schema.define(:version => 20131212204648) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "inbound_friend_id",                    :null => false
@@ -48,6 +48,19 @@ ActiveRecord::Schema.define(:version => 20131212193549) do
   add_index "posts", ["author_id", "recipient_id"], :name => "index_posts_on_author_id_and_recipient_id"
   add_index "posts", ["author_id"], :name => "index_posts_on_author_id"
   add_index "posts", ["recipient_id"], :name => "index_posts_on_recipient_id"
+
+  create_table "tags", :force => true do |t|
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "x_pos"
+    t.integer  "y_pos"
+    t.integer  "tagger_id"
+    t.integer  "taggee_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "tags", ["taggable_id", "taggable_type"], :name => "index_tags_on_taggable_id_and_taggable_type"
 
   create_table "users", :force => true do |t|
     t.string   "first_name"

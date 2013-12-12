@@ -18,6 +18,14 @@ class Post < ActiveRecord::Base
     primary_key: :id
   )
 
+  has_many :tags, as: :taggable
+
+  has_many(
+    :tagged_users,
+    through: :tags,
+    source: :taggee
+  )
+
   private
 
     def author_is_friends_with_recipient
