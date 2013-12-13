@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   validates :author_id, :recipient_id, :body, presence: true
   validate :author_is_friends_with_recipient
 
-  # after_create :send_notification
+  after_create :send_notification
 
   belongs_to(
     :recipient,
@@ -30,7 +30,8 @@ class Post < ActiveRecord::Base
 
   has_many(
     :notifications,
-    as: :notifiable
+    as: :notifiable,
+    dependent: :destroy
   )
 
   private
@@ -47,14 +48,15 @@ class Post < ActiveRecord::Base
     end
 
 
-    # def send_notification
-    #   user = User.find(tagger_id)
-    #   Notification.create(
-    #     recipient_id: taggee_id,
-    #     sender_id: tagger_id,
-    #     notifiable_id: taggable_id,
-    #     notifiable_type: "Tag",
-    #     message: "#{user.first_name} tagged you in a post!"
-    #   )
-    # end
+    def send_notification
+      return if recipient_id == author_id
+      user = User.find(author_id)
+      Notification.create(
+        recipient_id: recipient_id,
+        sender_id: author_id,
+        notifiable_id: id,
+        notifiable_type: "Post",
+        message: "#{user.first_name} posted on your wall!"
+      )
+    end
 end

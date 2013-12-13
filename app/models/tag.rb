@@ -33,7 +33,8 @@ class Tag < ActiveRecord::Base
 
   has_many(
     :notifications,
-    as: :notifiable
+    as: :notifiable,
+    dependent: :destroy
   )
 
   private
@@ -63,13 +64,14 @@ class Tag < ActiveRecord::Base
     end
 
     def send_notification
+      return if tagger_id == taggee_id
       user = User.find(tagger_id)
       Notification.create(
         recipient_id: taggee_id,
         sender_id: tagger_id,
         notifiable_id: taggable_id,
         notifiable_type: "Tag",
-        message: "#{user.first_name} tagged you in a post!"
+        message: "#{user.first_name} tagged you in a #{taggable_type.downcase}!"
       )
     end
 

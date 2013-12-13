@@ -23,7 +23,8 @@ class Friendship < ActiveRecord::Base
 
   has_many(
     :notifications,
-    as: :notifiable
+    as: :notifiable,
+    dependent: :destroy
   )
 
   private
@@ -39,8 +40,46 @@ class Friendship < ActiveRecord::Base
         friendship.pending = false
         friendship.save
         self.pending = false
+
+        notify_friends
+      else
+        notify_pending
       end
 
       true
+    end
+
+
+    def notify_friends
+      user_out = User.find(outbound_friend_id)
+      user_in = User.find(inbound_friend_id)
+
+      message = "You are now friends with "
+
+      Notification.create(
+        recipient_id: outbound_friend_id,
+        sender_id: inbound_friend_id,
+        notifiable_id: id,
+        notifiable_type: "Friendship",
+        message: "#{message} #{user_out.name}!"
+      )
+
+      Notification.create(
+        recipient_id: inbound_friend_id,
+        sender_id: outbound_friend_id,
+        notifiable_id: id,
+        notifiable_type: "Friendship",
+        message: "#{message} #{user_in.name}!"
+      )
+    end
+
+    def notify_pending
+      Notification.create(
+        recipient_id: outbound_friend_id,
+        sender_id: inbound_friend_id,
+        notifiable_id: id,
+        notifiable_type: "Friendship",
+        message: "#{User.find(outbound_friend_id)} would like to be your friend!"
+      )
     end
 end

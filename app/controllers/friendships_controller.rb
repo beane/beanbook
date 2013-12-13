@@ -5,6 +5,7 @@ class FriendshipsController < ApplicationController
     friendship.outbound_friend_id = current_user.id
     if friendship.save
       flash[:notice] = ["Friend request sent!"]
+
       redirect_to user_url(params[:user_id])
     else
       flash[:errors] = friendship.errors.full_messages
@@ -40,7 +41,7 @@ class FriendshipsController < ApplicationController
     )
 
     if friendship1 && friendship2
-      # i would like to user a transaction
+      # i would like to use a transaction
       # how can i raise and rescue errors?
       friendship1.destroy
       friendship2.destroy

@@ -8,5 +8,6 @@ Beanbook::Application.routes.draw do
     resources :tags, only: [:index, :create, :destroy]
   end
 
+  resources :notifications, only: :index
   root to: "feeds#show"
 end
