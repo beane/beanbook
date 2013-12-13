@@ -9,7 +9,7 @@ class Tag < ActiveRecord::Base
   )
 
   validates :taggable_type, :taggable_id, :tagger_id, :taggee_id, presence: true
-  validates :taggable_type, inclusion: {in: %w{ Post Photo }}
+  validates :taggable_type, inclusion: {in: %w( Post Photo )}
   validate(
     :can_only_tag_friend,
     :can_only_tag_on_friends_objects,
@@ -69,7 +69,7 @@ class Tag < ActiveRecord::Base
       Notification.create(
         recipient_id: taggee_id,
         sender_id: tagger_id,
-        notifiable_id: taggable_id,
+        notifiable_id: id,
         notifiable_type: "Tag",
         message: "#{user.first_name} tagged you in a #{taggable_type.downcase}!"
       )
