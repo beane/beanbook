@@ -4,6 +4,8 @@ class Post < ActiveRecord::Base
   validates :author_id, :recipient_id, :body, presence: true
   validate :author_is_friends_with_recipient
 
+  # after_create :send_notification
+
   belongs_to(
     :recipient,
     class_name: "User",
@@ -26,6 +28,11 @@ class Post < ActiveRecord::Base
     source: :taggee
   )
 
+  has_many(
+    :notifications,
+    as: :notifiable
+  )
+
   private
 
     def author_is_friends_with_recipient
@@ -38,4 +45,16 @@ class Post < ActiveRecord::Base
         errors.add(:friendship, "must exist")
       end
     end
+
+
+    # def send_notification
+    #   user = User.find(tagger_id)
+    #   Notification.create(
+    #     recipient_id: taggee_id,
+    #     sender_id: tagger_id,
+    #     notifiable_id: taggable_id,
+    #     notifiable_type: "Tag",
+    #     message: "#{user.first_name} tagged you in a post!"
+    #   )
+    # end
 end

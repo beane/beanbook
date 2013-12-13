@@ -21,6 +21,11 @@ class Friendship < ActiveRecord::Base
     primary_key: :id
   )
 
+  has_many(
+    :notifications,
+    as: :notifiable
+  )
+
   private
 
     def complete_friendship

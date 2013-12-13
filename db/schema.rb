@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131212204648) do
+ActiveRecord::Schema.define(:version => 20131213172018) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "inbound_friend_id",                    :null => false
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(:version => 20131212204648) do
 
   add_index "friendships", ["inbound_friend_id", "outbound_friend_id"], :name => "index_friendships_on_inbound_friend_id_and_outbound_friend_id", :unique => true
   add_index "friendships", ["inbound_friend_id", "pending"], :name => "index_friendships_on_inbound_friend_id_and_pending"
+
+  create_table "notifications", :force => true do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "message"
+  end
+
+  add_index "notifications", ["recipient_id"], :name => "index_notifications_on_recipient_id"
 
   create_table "photos", :force => true do |t|
     t.string   "photo_file_file_name"
