@@ -55,10 +55,15 @@ Friendship.create!(
   outbound_friend_id: brian.id
 )
 
-# Friendship.create!(
-#   inbound_friend_id: margaret.id,
-#   outbound_friend_id: brian.id
-# )
+Friendship.create!(
+  inbound_friend_id: margaret.id,
+  outbound_friend_id: goku.id
+)
+
+Friendship.create!(
+  inbound_friend_id: goku.id,
+  outbound_friend_id: margaret.id
+)
 
 Friendship.create!(
   inbound_friend_id: brian.id,
@@ -172,21 +177,21 @@ no_friends.save!
 
 Tag.create!(
   taggable_type: "Photo",
-  taggable_id: Photo.last.id,
+  taggable_id: space.id,
   tagger_id: goku.id,
   taggee_id: brian.id
 )
 
 Tag.create!(
   taggable_type: "Photo",
-  taggable_id: Photo.first.id,
+  taggable_id: portal.id,
   tagger_id: goku.id,
   taggee_id: margaret.id
 )
 
 Tag.create!(
   taggable_type: "Photo",
-  taggable_id: Photo.first.id,
+  taggable_id: burger.id,
   tagger_id: goku.id,
   taggee_id: brian.id
 )

@@ -10,18 +10,22 @@
 
 <%= render(partial: 'tags/tagged_users', locals: {object: @photo}) %>
 
-<h3>Tag Your Friends</h3>
-<ul>
-  <% tagged_users = @photo.tagged_users %>
-  <% (current_user.friends + [current_user]).each do |friend| %>
-    <% next if tagged_users.include?(friend) %>
+<% if current_user.id == params[:user_id].to_i || current_user.is_friends_with?(params[:user_id]) %>
+  <h3>Tag Your Friends</h3>
+  <ul>
+    <% tagged_users = @photo.tagged_users %>
+    <% (current_user.friends + [current_user]).each do |friend| %>
+      <% next if tagged_users.include?(friend) %>
 
-    <li>
-      <%= render(partial: 'tags/form', locals: {friend: friend, klass: Photo}) %>
-    </li>
+      <li>
+        <%= render(partial: 'tags/form', locals: {friend: friend, klass: Photo}) %>
+      </li>
 
-  <% end %>
-</ul>
+    <% end %>
+  </ul>
+<% end %>
+
+<!-- lets you make the picture your profile picture -->
 
 <form action="<%= user_url(current_user) %>" method="POST">
 

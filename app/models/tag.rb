@@ -3,6 +3,7 @@ class Tag < ActiveRecord::Base
 
   validates :taggable_type, :taggable_id, :tagger_id, :taggee_id, presence: true
   validates :taggable_type, inclusion: {in: %w{ Post Photo }}
+  validate :can_only_tag_friend, :can_only_tag_on_friends_objects, :tag_must_be_unique
 
   belongs_to(
     :tagger,
@@ -16,5 +17,27 @@ class Tag < ActiveRecord::Base
 
   belongs_to :taggable, polymorphic: true
 
-  # maybe write inbound and outbound messages
+  def can_only_tag_friend
+    unless User.find(tagger_id).friends.map(&:id).include?(taggee_id) || taggee_id == tagger_id
+      errors.add(:taggee_id, "is not your friend")
+    end
+  end
+
+  def can_only_tag_on_friends_objects
+    taggable = self.taggable
+    # see if taggable.user_id is either mine or one of my friends'
+    if !taggable
+      errors.add(taggable_type, "does not exist")
+    end
+
+    if tagger_id != taggable.user_id && !User.find(tagger_id).friends.map(&:id).include?(taggable.user_id)
+      errors.add(:taggable_id, "must belong to one of your friends")
+    end
+  end
+
+  def tag_must_be_unique
+    if Tag.find_by_taggable_type_and_taggable_id_and_taggee_id(taggable_type, taggable_id, taggee_id)
+      errors.add(:tag, "already exists")
+    end
+  end
 end
