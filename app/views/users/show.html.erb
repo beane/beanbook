@@ -1,4 +1,6 @@
-<%= image_tag @user.profile_photo.photo_file.url(:big) if @user.profile_photo %>
+<figure>
+  <%= image_tag @user.profile_photo.photo_file.url(:big) if @user.profile_photo %>
+</figure>
 
 <h2> <%= @user.name %>'s Page</h2>
 

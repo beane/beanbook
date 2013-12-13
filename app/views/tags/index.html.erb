@@ -1,4 +1,4 @@
-<h3>Places You've Been Tagged</h3>
+<h2>Places You've Been Tagged</h2>
 <ul>
   <% User.find(params[:user_id]).tags.each do |tag| %>
     <% taggable = tag.taggable %>

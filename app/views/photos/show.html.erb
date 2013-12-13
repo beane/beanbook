@@ -1,17 +1,26 @@
-<h3>View Photo</h3>
+<h2>View Photo</h2>
 
-<%= image_tag @photo.photo_file.url(:big) %>
-<%= @photo.caption %>
+<figure>
+  <%= image_tag @photo.photo_file.url(:big) %>
+  <figcaption><%= @photo.caption %></figcaption>
+</figure>
 
-<% if params[:user_id].to_i == current_user.id %>
-  <%= button_to "Delete Photo", user_photo_url(params[:user_id], @photo), method: :delete %>
-  <a href="<%= edit_user_photo_url(params[:user_id], @photo) %>">Edit Photo</a>
-<% end %>
+<!-- maybe this is a bad idea - should these be in the 'figure' proper? -->
+<div>
+  <% if params[:user_id].to_i == current_user.id %>
+    <%= button_to "Delete Photo", user_photo_url(params[:user_id], @photo), method: :delete %>
+    <a href="<%= edit_user_photo_url(params[:user_id], @photo) %>">Edit Photo</a>
+  <% end %>
+</div>
 
 <%= render(partial: 'tags/tagged_users', locals: {object: @photo}) %>
 
+<!-- tag friends if the photo belongs to you or your friends -->
+
 <% if current_user.id == params[:user_id].to_i || current_user.is_friends_with?(params[:user_id]) %>
+
   <h3>Tag Your Friends</h3>
+
   <ul>
     <% tagged_users = @photo.tagged_users %>
     <% (current_user.friends + [current_user]).each do |friend| %>
@@ -23,6 +32,7 @@
 
     <% end %>
   </ul>
+
 <% end %>
 
 <!-- lets you make the picture your profile picture -->

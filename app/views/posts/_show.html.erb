@@ -1,17 +1,24 @@
-<% author = post.author %>
-<%= render(partial: 'users/preview', locals: {user: author}) %>
+<article>
+  <header>
+    <% author = post.author %>
+    <%= render(partial: 'users/preview', locals: {user: author}) %>
 
-<% if post.recipient && post.recipient != author %>
-  ---> <a href="<%= user_url(post.recipient) %>"><%= post.recipient.name %></a>
-<% end %>
+    <% if post.recipient && post.recipient != author %>
+      ---> <a href="<%= user_url(post.recipient) %>"><%= post.recipient.name %></a>
+    <% end %>
+  </header>
 
 
-<%= post.body %>
-<a href="<%= post_url(post) %>">
-  <time><%= post.created_at %></time>
-</a>
+  <p><%= post.body %></p>
 
-<% if author == current_user || current_user.id == post.recipient_id %>
-  <a href="<%= edit_user_post_url(author, post) %>">Edit</a>
-  <%= button_to "Delete", user_post_url(current_user, post), method: :delete %>
-<% end %>
+  <footer>
+    <a href="<%= post_url(post) %>">
+      <time><%= post.created_at %></time>
+    </a>
+
+    <% if author == current_user || current_user.id == post.recipient_id %>
+      <a href="<%= edit_user_post_url(author, post) %>">Edit</a>
+      <%= button_to "Delete", user_post_url(current_user, post), method: :delete %>
+    <% end %>
+  </footer>
+</article>
