@@ -17,7 +17,7 @@ class Photo < ActiveRecord::Base
   #   foreign_key: :profile_picture_id
   # )
 
-  has_many :tags, as: :taggable
+  has_many :tags, as: :taggable, dependent: :destroy
 
   has_many(
     :tagged_users,

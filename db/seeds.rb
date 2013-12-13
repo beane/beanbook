@@ -108,6 +108,18 @@ brian_status = Post.create!(
   body: "Boy do I wish more people used beanbook."
 )
 
+Post.create!(
+  author_id: no_friends.id,
+  recipient_id: no_friends.id,
+  body: "I want some friends please."
+)
+
+Post.create!(
+  author_id: margaret.id,
+  recipient_id: margaret.id,
+  body: "I should get a real Facebook..."
+)
+
 # create photos
 
 beach = Photo.create!(

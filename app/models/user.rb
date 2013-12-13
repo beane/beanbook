@@ -91,6 +91,10 @@ class User < ActiveRecord::Base
     conditions: "friendships.pending IS true"
   )
 
+  def name
+    "#{self.first_name} #{self.last_name}"
+  end
+
   def is_friends_with?(user_id)
     return true if user_id == self.id
     friendship = Friendship

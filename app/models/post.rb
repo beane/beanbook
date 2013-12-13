@@ -18,7 +18,7 @@ class Post < ActiveRecord::Base
     primary_key: :id
   )
 
-  has_many :tags, as: :taggable
+  has_many :tags, as: :taggable, dependent: :destroy
 
   has_many(
     :tagged_users,

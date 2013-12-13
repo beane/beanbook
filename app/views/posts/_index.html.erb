@@ -4,6 +4,11 @@
       <% author = post.author %>
       <%= render(partial: 'users/preview', locals: {user: author}) %>
 
+      <% if post.recipient && post.recipient != author %>
+        ---> <a href="<%= user_url(post.recipient) %>"><%= post.recipient.name %></a>
+      <% end %>
+
+
       <%= post.body %>
       <%= post.created_at %>
       <% if author == current_user %>

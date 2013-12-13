@@ -1,5 +1,5 @@
 <a href="<%= user_url(user) %>">
   <% photo = user.profile_photo %>
-  <%= photo ? image_tag(photo.photo_file.url(:small)) : image_tag(File.open("/Users/appacademy/Desktop/beanbook/app/assets/images/rails.png"))%>
-  <%= user.first_name %> <%= user.last_name %>
+  <%= photo ? image_tag(photo.photo_file.url(:small)) : "" %>
+  <%= user.name %>
 </a>

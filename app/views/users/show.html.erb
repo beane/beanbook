@@ -1,6 +1,6 @@
 <%= image_tag @user.profile_photo.photo_file.url(:big) if @user.profile_photo %>
 
-<h2> <%= @user.first_name %> <%= @user.last_name %>'s Page</h2>
+<h2> <%= @user.name %>'s Page</h2>
 
 <a href="<%= user_photos_url(@user) %>">View <%= @user.first_name %>'s Photos</a>
 
