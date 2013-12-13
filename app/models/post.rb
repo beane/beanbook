@@ -41,7 +41,7 @@ class Post < ActiveRecord::Base
         .where(pending: false)
         .find_by_inbound_friend_id_and_outbound_friend_id(author_id, recipient_id)
 
-      if !friendship && author_id != recipient_id
+      unless friendship || author_id == recipient_id
         # allowed to post on your own wall
         errors.add(:friendship, "must exist")
       end

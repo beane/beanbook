@@ -32,4 +32,19 @@ class Notification < ActiveRecord::Base
   )
 
   belongs_to :notifiable, polymorphic: true
+
+  def params
+    controller = notifiable_type.downcase.pluralize
+    id = notifiable_id
+
+    case notifiable_type
+    when "Tag"
+
+    when "Post"
+      # , only_path: false
+      {controller: controller, action: "show", id: id, user_id: notifiable.recipient}
+    when "Friendship"
+
+    end
+  end
 end

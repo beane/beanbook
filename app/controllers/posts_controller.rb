@@ -14,6 +14,11 @@ class PostsController < ApplicationController
     end
   end
 
+  def show
+    @post = Post.find(params[:id])
+    @recipient = @post.recipient
+  end
+
   def edit
     @post = Post.find(params[:id])
     render :edit
