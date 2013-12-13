@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   def update
     user = current_user
     if user.update_attributes(params[:user])
-      flash[:notice] = ["You have a new profile picture!"]
+      flash[:notice] = ["You successfully updated your profile!"]
     else
       flash[:errors] = user.errors.full_messages
     end

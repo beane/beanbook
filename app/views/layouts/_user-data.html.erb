@@ -1,6 +1,7 @@
 <!-- much of this will be in the sidebar as well -->
 <% if logged_in? %>
   Hello, <a href="<%= user_url(current_user) %>"><%= current_user.first_name %>!</a>
+  <a href="<%= edit_user_url(current_user) %>">Edit Your Profile</a>
   <a href="<%= root_url %>">Feed</a>
   <a href="<%= user_friends_url(current_user) %>">Your Friends</a>
   <a href="<%= users_url %>">Find New Friends</a>
