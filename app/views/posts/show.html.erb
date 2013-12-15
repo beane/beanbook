@@ -1,3 +1,5 @@
 <h2>One Post on <%= @recipient.name %>'s Page</h2>
 
-<%= render(partial: 'posts/show', locals: {post: @post}) %>
+<div class="show">
+  <%= render(partial: 'posts/show', locals: {post: @post}) %>
+</div>

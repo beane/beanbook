@@ -158,12 +158,17 @@ header.header a:hover, button:hover, input[type=submit]:hover {
 /* content */
 
 .content {
-  float: left;
+/*  float: left;*/
+  width: 600px;
+  margin: auto;
 }
+
+/* not too please with the hackiness here */
 
 h2 {
   padding-top: 10px;
   padding-bottom: 30px;
+  padding-left: 100px;
   font-weight: bold;
   font-size: 25px;
   text-align: center;
@@ -246,4 +251,12 @@ label {
 .post input {
   position: relative;
   top: -5px;
+}
+
+/* fix up the solo show page */
+
+.show .post {
+  width: 725px;
+  margin: auto;
+  border: 10px solid lightgray;
 }
