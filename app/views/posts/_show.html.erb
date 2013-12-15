@@ -6,7 +6,7 @@
     <% if post.recipient && post.recipient != author %>
 
     <div class="preview-name">
-       ---> <a href="<%= user_url(post.recipient) %>"><%= post.recipient.name %></a>
+      &nbsp→ <a href="<%= user_url(post.recipient) %>"><%= post.recipient.name %></a>
     </div>
 
     <% end %>
