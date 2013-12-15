@@ -46,14 +46,29 @@ class Notification < ActiveRecord::Base
         id: object.id,
         user_id: user_id
       }
+
     when "Post"
       {
         controller: "posts",
         action: "show",
         id: id
       }
-    when "Friendship"
 
+    when "Friendship"
+      if message[0] == "Y" # from "You are now friends with..."
+        {
+          controller: "users",
+          action: "show",
+          id: sender_id
+        }
+
+      else
+        {
+          controller: "friends",
+          action: "index",
+          user_id: recipient_id
+        }
+      end
     end
   end
 end
