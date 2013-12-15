@@ -1,4 +1,4 @@
-<ul>
+<ul class="posts">
   <% posts.reverse.each do |post| %>
     <li>
       <%= render(partial: 'posts/show', locals: {post: post}) %>

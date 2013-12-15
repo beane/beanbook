@@ -30,6 +30,7 @@ ul, li {
 body {
   font-family: sans-serif;
   font-size: 20px;
+  background: lightgray;
 }
 
 a, a:visited {
@@ -111,26 +112,8 @@ header.header a:hover, button:hover, input[type=submit]:hover {
   color: yellow;
 }
 
-/* sidebar */
+/* page */
 
-.sidebar {
-  float: left;
-  width: 225px;
-  margin: auto;
-  padding-right: 50px;
-}
-
-.sidebar > a {
-  display: block;
-  padding-bottom: 10px;
-  border-right: 1px solid gray;
-}
-
-.sidebar a:hover {
-  font-weight: bold;
-}
-
-/* content */
 
 .page {
   width: 1200px;
@@ -139,7 +122,40 @@ header.header a:hover, button:hover, input[type=submit]:hover {
   border: 1px solid black;
   border-top: 0;
   margin-bottom: 50px;
+  background: white;
 }
+
+.page input[type=submit], button {
+  padding: 5px;
+  border-radius: 5px;
+  margin: auto;
+}
+
+.page input[type=submit]:hover, button:hover {
+  background: blue;
+  color: white;
+  cursor: pointer;
+}
+
+/* sidebar */
+
+.sidebar {
+  float: left;
+  width: 225px;
+  margin: auto;
+  border-right: 1px solid gray;
+}
+
+.sidebar > a {
+  display: block;
+  padding-bottom: 10px;
+}
+
+.sidebar a:hover {
+  font-weight: bold;
+}
+
+/* content */
 
 .content {
   float: left;
@@ -167,4 +183,67 @@ label {
 
 .errors {
   color: red;
+}
+
+/* posts */
+
+.posts {
+  border: 10px solid lightgray;
+  border-bottom: 0;
+  margin: 30px auto;
+  width: 725px;
+}
+
+.post {
+  border-bottom: 10px solid lightgray;
+}
+
+.post .preview-photo {
+  float:left;
+  width: 75px;
+  height: auto;
+  padding-right: 30px;
+  padding-bottom: 30px;
+}
+
+.post img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.post .preview-name {
+  float: left;
+  padding-top: 25px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.post-header {
+  padding: 30px 30px 0 30px;
+  border-bottom: 5px solid lightgray;
+}
+
+.post p {
+  padding: 30px 30px 0 30px;
+}
+
+.post footer {
+  padding: 30px;
+}
+
+.post time {
+  color: gray;
+}
+
+/* the form here ruins everything and i don't know why */
+.post time, /*form,*/ .edit-link {
+  float: left;
+  padding-right: 10px;
+}
+
+/* i am aware that this is super hacky */
+.post input {
+  position: relative;
+  top: -5px;
 }
