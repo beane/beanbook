@@ -5,11 +5,15 @@
     <li>
       <!-- FOR NOW THIS IS JUST A PHOTO - IT WILL CAUSE PROBLEMS LATER -->
       <!-- I can have a conditional that checks for the url depending on the class -->
-      <a href="<%= user_photo_url(taggable.user_id, taggable.id) %>">
-        <%= image_tag(taggable.photo_file.url(:small)) %>
-        <%= taggable.class %>
-        <%= taggable.id %>
-      </a>
+      <figure class="preview-photo">
+        <a href="<%= user_photo_url(taggable.user_id, taggable.id) %>">
+          <%= image_tag(taggable.photo_file.url(:small)) %>
+          <figcaption>
+            <%= taggable.class %>
+            <%= taggable.id %>
+          </figcaption>
+        </a>
+      </figure>
     </li>
   <% end %>
 </ul>

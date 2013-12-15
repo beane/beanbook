@@ -1,4 +1,4 @@
-<ul>
+<ul class="friends-index">
   <% users.each do |user| %>
     <% other_button = "" %>
     <% next if user == current_user %>
@@ -21,10 +21,10 @@
       <% button = button_to "Friend", user_friendships_url(user), method: :post %>
     <% end %>
 
-    <li>
+    <li class="clearfix">
         <%= render(partial: 'users/preview', locals: {user: user}) %>
-        <%= button %>
-        <%= other_button %>
+        <span><%= button %></span>
+        <span><%= other_button %></span>
     </li>
   <% end %>
 </ul>

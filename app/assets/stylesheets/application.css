@@ -14,7 +14,7 @@
 
 /* reset user agent styles */
 
-html, body, h1, h2, h3, header, footer, nav, a, article, p, img, figure, section, input, button, ul, li, form, label, textarea {
+html, body, h1, h2, h3, header, footer, nav, a, article, p, span, img, figure, section, input, button, ul, li, form, label, textarea {
   margin: 0;
   padding: 0;
   border: 0;
@@ -64,8 +64,14 @@ input[type=text]:focus, input[type=password]:focus, input[type=file]:focus, text
 }
 
 textarea {
-  max-width: 850px;
-  min-width: 850px;
+  max-width: 735px;
+  min-width: 735px;
+}
+
+h3 {
+  font-size: 25px;
+  font-weight: bold;
+  padding-bottom: 20px;
 }
 
 /* clearfix helper */
@@ -146,6 +152,12 @@ header.header a:hover, button:hover, input[type=submit]:hover {
   border-right: 1px solid gray;
 }
 
+/* undo weird h2 styling elsewhere*/
+
+.sidebar h2 {
+  padding: 20px 20px 0 0;
+}
+
 .sidebar > a {
   display: block;
   padding-bottom: 10px;
@@ -170,7 +182,7 @@ h2 {
   padding-bottom: 30px;
   padding-left: 100px;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 30px;
   text-align: center;
 }
 
@@ -184,6 +196,8 @@ label {
 .notices, .errors {
   text-align: center;
   font-weight: bold;
+  width: 725px;
+  margin: auto;
 }
 
 .errors {
@@ -203,7 +217,7 @@ label {
   border-bottom: 10px solid lightgray;
 }
 
-.post .preview-photo {
+.preview-photo {
   float:left;
   width: 75px;
   height: auto;
@@ -211,13 +225,13 @@ label {
   padding-bottom: 30px;
 }
 
-.post img {
+img {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.post .preview-name {
+.preview-name {
   float: left;
   padding-top: 25px;
   font-size: 25px;
@@ -259,4 +273,56 @@ label {
   width: 725px;
   margin: auto;
   border: 10px solid lightgray;
+}
+
+/* friend index pages */
+
+.friends-index .preview-name {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.friends-index span {
+  float: left;
+  padding: 20px;
+  padding-right: 2px;
+  font-size: 18px;
+}
+
+/* tagged users */
+
+.tagged-users .preview-name {
+  font-size: 22px;
+  font-weight: normal;
+}
+
+.tagged-users input {
+  position: relative;
+  top: 20px ! important;
+  margin-left: 20px ! important; /* oh dear god why */
+}
+
+/* show photos */
+
+figure.large-photo {
+  position: relative;
+  left: 50px;
+  width: 400px;
+  margin: auto;
+  height: auto;
+  text-align: center;
+}
+
+figure figcaption {
+  padding-bottom: 10px;
+}
+
+.tagging-users h3 {
+  padding-top: 50px;
+}
+
+/* new post form */
+
+.new-post {
+  width: 725;
 }

@@ -1,19 +1,36 @@
 <h2>View Photo</h2>
 
-<figure>
+<figure class="large-photo">
   <%= image_tag @photo.photo_file.url(:big) %>
   <figcaption><%= @photo.caption %></figcaption>
+
+  <div class="change-photo">
+    <% if params[:user_id].to_i == current_user.id %>
+      <a href="<%= edit_user_photo_url(params[:user_id], @photo) %>">Edit Photo</a>
+      <%= button_to "Delete Photo", user_photo_url(params[:user_id], @photo), method: :delete %>
+    <% end %>
+  </div>
+
+  <!-- lets you make the picture your profile picture -->
+
+  <form action="<%= user_url(current_user) %>" method="POST">
+
+    <input type="hidden" name="_method" value="PUT">
+
+    <input
+      type="hidden"
+      name="authenticity_token"
+      value="<%= form_authenticity_token %>">
+
+    <input type="hidden" name="user[profile_photo_id]" value="<%= @photo.id %>">
+
+    <input type="submit" value="Make This Your Profile Picture">
+  </form>
 </figure>
 
-<!-- maybe this is a bad idea - should these be in the 'figure' proper? -->
-<div>
-  <% if params[:user_id].to_i == current_user.id %>
-    <%= button_to "Delete Photo", user_photo_url(params[:user_id], @photo), method: :delete %>
-    <a href="<%= edit_user_photo_url(params[:user_id], @photo) %>">Edit Photo</a>
-  <% end %>
+<div class="tagging-users">
+  <%= render(partial: 'tags/tagged_users', locals: {object: @photo}) %>
 </div>
-
-<%= render(partial: 'tags/tagged_users', locals: {object: @photo}) %>
 
 <!-- tag friends if the photo belongs to you or your friends -->
 
@@ -35,20 +52,4 @@
 
 <% end %>
 
-<!-- lets you make the picture your profile picture -->
-
-<form action="<%= user_url(current_user) %>" method="POST">
-
-  <input type="hidden" name="_method" value="PUT">
-
-  <input
-    type="hidden"
-    name="authenticity_token"
-    value="<%= form_authenticity_token %>">
-
-  <input type="hidden" name="user[profile_photo_id]" value="<%= @photo.id %>">
-
-  <input type="submit" value="Make This Your Profile Picture">
-</form>
-
-<a href="<%= user_photos_url(params[:user_id]) %>">Back to Photos</a>
+<a href="<%= user_photos_url(params[:user_id]) %>"><< Back to Photos</a>
