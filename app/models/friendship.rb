@@ -44,8 +44,6 @@ class Friendship < ActiveRecord::Base
 
         notify_friends
       elsif self.pending
-
-      else
         notify_pending
       end
 
