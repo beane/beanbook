@@ -74,6 +74,10 @@ h3 {
   padding-bottom: 20px;
 }
 
+time {
+  color: gray;
+}
+
 /* clearfix helper */
 
 .clearfix:after {
@@ -249,10 +253,6 @@ img {
 
 .post footer {
   padding: 30px;
-}
-
-.post time {
-  color: gray;
 }
 
 /* the form here ruins everything and i don't know why */

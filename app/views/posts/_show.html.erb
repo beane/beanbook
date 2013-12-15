@@ -18,14 +18,17 @@
   <footer class="post-footer clearfix">
     <time>
       <a href="<%= post_url(post) %>">
-        <%= post.created_at %>
+        <%= post.created_at.to_formatted_s(:short)  %>
       </a>
     </time>
 
-    <% if author == current_user || current_user.id == post.recipient_id %>
-    <div class="edit-link">
-      <a href="<%= edit_user_post_url(author, post) %>">Edit</a>
-    </div>
+    <% if current_user.id == post.recipient_id %>
+      <% if author == current_user  %>
+        <div class="edit-link">
+          <a href="<%= edit_user_post_url(author, post) %>">Edit</a>
+        </div>
+      <% end %>
+
       <%= button_to "Delete", user_post_url(current_user, post), method: :delete %>
     <% end %>
   </footer>

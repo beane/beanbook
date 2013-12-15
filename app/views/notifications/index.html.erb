@@ -6,7 +6,7 @@
       <a href="<%= url_for(note.params) %>">
         <%= note.message %>
       </a>
-      <time><%= note.created_at %></time>
+      <time><%= note.created_at.to_formatted_s(:short) %></time>
     </li>
 
   <% end %>

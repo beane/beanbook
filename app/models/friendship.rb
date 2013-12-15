@@ -5,7 +5,7 @@ class Friendship < ActiveRecord::Base
   validates :inbound_friend_id, uniqueness: {scope: :outbound_friend_id}
   validates :pending, inclusion: {in: [true, false]}
 
-  before_save :complete_friendship
+  after_save :complete_friendship
 
   belongs_to(
     :inbound_friend,
@@ -36,50 +36,53 @@ class Friendship < ActiveRecord::Base
           self.inbound_friend_id
         )
 
-      if friendship && friendship.pending
+      if self.pending && friendship && friendship.pending
         friendship.pending = false
         friendship.save
         self.pending = false
+        save
 
-        # notify_friends
+        notify_friends
+      elsif self.pending
+
       else
-        # notify_pending
+        notify_pending
       end
 
       true
     end
 
 
-    # def notify_friends
-    #   user_out = User.find(outbound_friend_id)
-    #   user_in = User.find(inbound_friend_id)
-    #
-    #   message = "You are now friends with "
-    #
-    #   Notification.create(
-    #     recipient_id: outbound_friend_id,
-    #     sender_id: inbound_friend_id,
-    #     notifiable_id: id,
-    #     notifiable_type: "Friendship",
-    #     message: "#{message} #{user_out.name}!"
-    #   )
-    #
-    #   Notification.create(
-    #     recipient_id: inbound_friend_id,
-    #     sender_id: outbound_friend_id,
-    #     notifiable_id: id,
-    #     notifiable_type: "Friendship",
-    #     message: "#{message} #{user_in.name}!"
-    #   )
-    # end
-    #
-    # def notify_pending
-    #   Notification.create(
-    #     recipient_id: outbound_friend_id,
-    #     sender_id: inbound_friend_id,
-    #     notifiable_id: id,
-    #     notifiable_type: "Friendship",
-    #     message: "#{User.find(outbound_friend_id)} would like to be your friend!"
-    #   )
-    # end
+    def notify_friends
+      user_out = User.find(outbound_friend_id)
+      user_in = User.find(inbound_friend_id)
+
+      message = "You are now friends with "
+
+      Notification.create(
+        recipient_id: outbound_friend_id,
+        sender_id: inbound_friend_id,
+        notifiable_id: id,
+        notifiable_type: "Friendship",
+        message: "#{message} #{user_in.name}!"
+      )
+
+      Notification.create(
+        recipient_id: inbound_friend_id,
+        sender_id: outbound_friend_id,
+        notifiable_id: id,
+        notifiable_type: "Friendship",
+        message: "#{message} #{user_out.name}!"
+      )
+    end
+
+    def notify_pending
+      Notification.create(
+        recipient_id: inbound_friend_id,
+        sender_id: outbound_friend_id,
+        notifiable_id: id,
+        notifiable_type: "Friendship",
+        message: "#{User.find(outbound_friend_id).name} would like to be your friend!"
+      )
+    end
 end

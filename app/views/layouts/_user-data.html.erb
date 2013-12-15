@@ -2,7 +2,7 @@
 <% if logged_in? %>
   <li>Hello, <a href="<%= user_url(current_user) %>"><%= current_user.first_name %>!</a></li>
   <li><a href="<%= root_url %>">Feed</a></li>
-  <li><a href="<%= notifications_url %>">Your Notifications</a></li>
+  <li><a href="<%= notifications_url %>">Notifications</a></li>
   <li><%= button_to "Log out", session_url, method: :delete %></li>
 <% else %>
   <li><a href="<%= new_session_url %>">Log In</a></li>
