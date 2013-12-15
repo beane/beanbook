@@ -8,13 +8,23 @@
 </head>
 <body>
 
-<h1>Welcome to BeanBook!</h1>
+<header class="header clearfix">
+  <h1 class="logo"><a href="<%= root_url %>">BeanBook</a></h1>
+  <nav><%= render 'layouts/user-data' %></nav>
+</header>
 
-<header><%= render 'layouts/user-data' %></header>
-<%= render 'layouts/errors' %>
-<%= render 'layouts/notices' %>
+<div class="page clearfix">
 
-<%= yield %>
+  <%= render 'layouts/sidebar' %>
+
+  <section class="content">
+    <%= render 'layouts/errors' %>
+    <%= render 'layouts/notices' %>
+
+    <%= yield %>
+  </section>
+
+</div>
 
 </body>
 </html>

@@ -1,5 +1,5 @@
-<article>
-  <header>
+<article class="post">
+  <header class="post-header">
     <% author = post.author %>
     <%= render(partial: 'users/preview', locals: {user: author}) %>
 
@@ -11,7 +11,7 @@
 
   <p><%= post.body %></p>
 
-  <footer>
+  <footer class="post-footer">
     <a href="<%= post_url(post) %>">
       <time><%= post.created_at %></time>
     </a>

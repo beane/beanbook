@@ -1,0 +1,13 @@
+<section class="sidebar">
+  <% if logged_in? %>
+    <a href="<%= user_url(current_user) %>">Your Profile</a>
+    <a href="<%= edit_user_url(current_user) %>">Edit Your Profile</a>
+    <a href="<%= user_friends_url(current_user) %>">Your Friends</a>
+    <a href="<%= user_photos_url(current_user) %>">Your Photos</a>
+    <a href="<%= user_tags_url(current_user) %>">Your Tags</a>
+    <a href="<%= new_user_photo_url(current_user) %>">Upload a New Photo</a>
+    <a href="<%= users_url %>">Find New Friends</a>
+  <% else %>
+    <h2>Awesome stuff here as soon as you log in!</h2>
+  <% end %>
+</section>
