@@ -1,13 +1,1 @@
-<h2>Your Notifications</h2>
-<ul>
-  <% @notifications.each do |note| %>
-
-    <li>
-      <a href="<%= url_for(note.params) %>">
-        <%= note.message %>
-      </a>
-      <time><%= note.created_at.to_formatted_s(:short) %></time>
-    </li>
-
-  <% end %>
-</ul>
+<%= render partial: 'notifications/index', locals: {notifications: @notifications} %>

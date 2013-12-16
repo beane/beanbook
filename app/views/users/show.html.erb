@@ -1,15 +1,1 @@
-<figure class="large-photo">
-  <%= image_tag @user.profile_photo.photo_file.url(:big) if @user.profile_photo %>
-</figure>
-
-<h2> <%= @user.name %>'s Page</h2>
-
-<a href="<%= user_photos_url(@user) %>">View <%= @user.first_name %>'s Photos</a>
-<br>
-<br>
-
-<% if logged_in? && current_user.is_friends_with?(params[:id].to_i) %>
-  <%= render(partial: 'posts/form', locals: {post: Post.new(), user: User.find(params[:id])})%>
-<% end %>
-
-<%= render(partial: 'posts/index', locals: {posts: @wallposts, user: User.find(params[:id])}) %>
+<%= render partial: 'users/show', locals: {wallposts: @wallposts, user: @user} %>

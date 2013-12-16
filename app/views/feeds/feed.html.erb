@@ -1,3 +1,1 @@
-<h2>Your Feed</h2>
-<%= render(partial: 'posts/form', locals: {post: Post.new, user: current_user}) %>
-<%= render(partial: 'posts/index', locals: {posts: @feed_posts}) %>
+<%= render partial: 'feeds/feed', locals: {feed_posts: @feed_posts}  %>

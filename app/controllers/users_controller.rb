@@ -26,7 +26,11 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @wallposts = @user.wallposts.order(:created_at)
-    render :show
+    if request.xhr?
+      render partial: 'users/show', locals: {wallposts: @wallposts, user: @user}
+    else
+      render :show
+    end
   end
 
   def update

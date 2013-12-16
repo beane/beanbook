@@ -64,8 +64,8 @@ input[type=text]:focus, input[type=password]:focus, input[type=file]:focus, text
 }
 
 textarea {
-  max-width: 735px;
-  min-width: 735px;
+  max-width: 725px;
+  min-width: 725px;
 }
 
 h3 {

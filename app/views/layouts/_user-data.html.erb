@@ -1,11 +1,22 @@
 <ul>
 <% if logged_in? %>
-  <li>Hello, <a href="<%= user_url(current_user) %>"><%= current_user.first_name %>!</a></li>
-  <li><a href="<%= root_url %>">Feed</a></li>
-  <li><a href="<%= notifications_url %>">Notifications</a></li>
+  <li>Hello, <a href="<%= user_url(current_user) %>" data-remote="true"><%= current_user.first_name %>!</a></li>
+  <li><a href="<%= root_url %>" data-remote="true">Feed</a></li>
+  <li><a href="<%= notifications_url %>" data-remote="true">Notifications</a></li>
   <li><%= button_to "Log out", session_url, method: :delete %></li>
 <% else %>
   <li><a href="<%= new_session_url %>">Log In</a></li>
   <li><a href="<%= new_user_url %>">Sign Up</a></li>
 <% end %>
 </ul>
+
+<script>
+
+  $(document).ready(function(event) {
+    // do i need to worry about event listeners?
+    $("a").on("ajax:success", function(event, data) {
+      $(".content").html(data);
+    });
+
+  });
+</script>
