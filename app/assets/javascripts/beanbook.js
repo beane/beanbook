@@ -9,5 +9,5 @@ window.Beanbook = {
 };
 
 $(document).ready(function(){
-  Beanbook.initialize();
+  // Beanbook.initialize();
 });

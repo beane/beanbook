@@ -3,20 +3,29 @@ class PostsController < ApplicationController
     post = Post.new(params[:post])
     post.author_id = current_user.id
     post.recipient_id = params[:user_id]
-    if post.save
-      # render json: post
-      redirect_to user_url(params[:user_id])
+
+    if request.xhr?
+      if post.save
+        render partial: 'posts/show', locals: {post: post}
+      else
+        flash[:errors] = post.errors.full_messages
+        # this doesn't really do anything
+        render json: post
+      end
     else
-      flash[:errors] = post.errors.full_messages
-      # what to send back?
-      # i don't want to refresh the page
-      render json: post
+      redirect_to user_url(params[:user_id])
     end
   end
 
   def show
     @post = Post.find(params[:id])
     @recipient = @post.recipient
+
+    if request.xhr?
+      render partial: 'posts/show', locals: {post: @post}
+    else
+      render :show
+    end
   end
 
   def edit
