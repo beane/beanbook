@@ -22,13 +22,13 @@
       </a>
     </time>
 
-    <% if current_user.id == post.recipient_id %>
-      <% if author == current_user  %>
-        <div class="edit-link">
-          <a href="<%= edit_user_post_url(author, post) %>">Edit</a>
-        </div>
-      <% end %>
+    <% if author == current_user %>
+      <div class="edit-link">
+        <a href="<%= edit_user_post_url(author, post) %>">Edit</a>
+      </div>
+    <% end %>
 
+    <% if author == current_user || current_user.id == post.recipient_id %>
       <%= button_to "Delete", user_post_url(current_user, post), method: :delete %>
     <% end %>
   </footer>

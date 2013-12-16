@@ -65,6 +65,7 @@ class Tag < ActiveRecord::Base
 
     def send_notification
       return if tagger_id == taggee_id
+
       user = User.find(tagger_id)
       Notification.create(
         recipient_id: taggee_id,
