@@ -1,7 +1,11 @@
 class FriendsController < ApplicationController
   def index
     @friends = current_user.friends
-    # @pending_friends = current_user.
-    render :index
+
+    if request.xhr?
+
+    else
+      render :index
+    end
   end
 end

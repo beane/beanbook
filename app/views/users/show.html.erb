@@ -13,14 +13,3 @@
 <% end %>
 
 <%= render(partial: 'posts/index', locals: {posts: @wallposts, user: User.find(params[:id])}) %>
-
-<script>
-  $("document").ready(function(event) {
-
-    $(".new-post").on("ajax:success", function(event, data) {
-      $(".posts").prepend(data);
-      this.reset();
-    });
-
-  });
-</script>

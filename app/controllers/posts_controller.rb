@@ -8,7 +8,7 @@ class PostsController < ApplicationController
       if post.save
         render partial: 'posts/show', locals: {post: post}
       else
-        flash[:errors] = post.errors.full_messages
+        # flash[:errors] = post.errors.full_messages
         # this doesn't really do anything
         render json: post
       end

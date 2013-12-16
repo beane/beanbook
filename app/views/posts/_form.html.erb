@@ -20,3 +20,14 @@
 
   <input type="submit" value="Post!">
 </form>
+
+<script>
+  $("document").ready(function(event) {
+
+    $(".new-post").on("ajax:success", function(event, data) {
+      $(".posts").prepend(data);
+      this.reset();
+    });
+
+  });
+</script>
