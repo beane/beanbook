@@ -3,3 +3,23 @@
 <div class="show">
   <%= render(partial: 'posts/show', locals: {post: @post}) %>
 </div>
+
+<script>
+
+  $(document).ready(function(event) {
+    $(".post").on("ajax:success", ".edit-link a", function(event, data) {
+
+      var $p = $(this).parent().parent().parent().find("p");
+      $p.html(data);
+
+      $(".new-post").off();
+
+      $(".new-post").on("ajax:success", function(event, data) {
+        var newText = $(this).find("textarea").val();
+        $p.html(newText);
+      });
+    });
+  });
+
+</script>
+
