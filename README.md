@@ -9,3 +9,10 @@ This is a facebook clone - my final project for App Academy. It can be found [he
 - BCrypt for authentication
 - JavaScript
 - AJAX
+
+## Features
+- Friendships
+- Posts (create, edit, and delete)
+- Photo upload
+- Photo tagging
+- Automatic notification
