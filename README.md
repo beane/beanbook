@@ -1,6 +1,6 @@
 # BeanBook
 ## Introduction
-This is a facebook clone - my final project for App Academy. It can be found at beanbook.herokuapp.com.
+This is a facebook clone - my final project for App Academy. It can be found [here](http://beanbook.herokuapp.com).
 
 ## Technologies
 - Ruby on Rails
