@@ -16,3 +16,11 @@ This is a facebook clone - my final project for App Academy. It can be found [he
 - Photo upload and deletion
 - Photo tagging
 - Automatic notification
+
+## To do
+- Messaging
+- JavaScriptify photo tagging
+- Auto refresh page for notifications
+- Email confirmation
+- Confirm password on sign up
+- JavaScriptify friending
