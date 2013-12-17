@@ -8,7 +8,10 @@ This is a facebook clone - my final project for App Academy. It can be found [he
 - [Paperclip](https://github.com/thoughtbot/paperclip) and [AWS](http://docs.aws.amazon.com/AWSRubySDK/latest/frames.html) gems for online photo storage
 - BCrypt for authentication
 - JavaScript
+- jQuery
 - AJAX
+- Postgres
+- Heroku
 
 ## Features
 - Friendships
