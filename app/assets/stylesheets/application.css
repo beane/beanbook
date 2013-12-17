@@ -32,6 +32,7 @@ body {
   font-family: sans-serif;
   font-size: 20px;
   background: lightgray;
+  overflow: scroll;
 }
 
 a, a:visited {
@@ -132,7 +133,6 @@ header.header a:hover, button:hover, input[type=submit]:hover {
   padding: 20px;
   border: 1px solid black;
   border-top: 0;
-  margin-bottom: 50px;
   background: white;
 }
 
@@ -178,6 +178,7 @@ header.header a:hover, button:hover, input[type=submit]:hover {
 /*  float: left;*/
   width: 600px;
   margin: auto;
+  margin-bottom: 50px;
 }
 
 /* not too please with the hackiness here */
