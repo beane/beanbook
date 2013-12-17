@@ -16,7 +16,7 @@
   <p><%= post.body %></p>
 
   <footer class="post-footer clearfix">
-    <time>
+    <time class="post-page-link">
       <a href="<%= post_url(post) %>">
         <%= post.created_at.to_formatted_s(:short)  %>
       </a>
@@ -33,3 +33,33 @@
     <% end %>
   </footer>
 </article>
+
+
+<script>
+
+  $(document).ready(function(event) {
+    $(".posts").off();
+
+    $(".posts").on("ajax:success", ".edit-link a", function(event, data) {
+
+      var $p = $(this).parent().parent().parent().find("p");
+      $p.html(data);
+
+      $(".new-post").off();
+
+      $(".new-post").on("ajax:success", function(event, data) {
+        var newText = $(this).find("textarea").val();
+        $p.html(newText);
+        this.reset();
+      });
+    });
+
+    // for rendering the post by itself - not worth it right now
+    // $(".posts").on("ajax:success", ".post-page-link a", function(event, data) {
+    //
+    //   $(".content").html(data)
+    //
+    // });
+  });
+
+</script>

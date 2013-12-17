@@ -5,24 +5,3 @@
     </li>
   <% end %>
 </ul>
-
-<script>
-
-  $(document).ready(function(event) {
-    $(".posts").off();
-
-    $(".posts").on("ajax:success", ".edit-link a", function(event, data) {
-
-      var $p = $(this).parent().parent().parent().find("p");
-      $p.html(data);
-
-      $(".new-post").off();
-
-      $(".new-post").on("ajax:success", function(event, data) {
-        var newText = $(this).find("textarea").val();
-        $p.html(newText);
-      });
-    });
-  });
-
-</script>
