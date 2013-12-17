@@ -9,6 +9,8 @@
 <script>
 
   $(document).ready(function(event) {
+    $(".posts").off();
+
     $(".posts").on("ajax:success", ".edit-link a", function(event, data) {
 
       var $p = $(this).parent().parent().parent().find("p");

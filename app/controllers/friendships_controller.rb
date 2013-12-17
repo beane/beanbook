@@ -6,7 +6,11 @@ class FriendshipsController < ApplicationController
     if friendship.save
       flash[:notice] = ["Friend request sent!"]
 
-      redirect_to user_url(params[:user_id])
+      if request.xhr?
+        render partial: 'friends/index', locals: {friends: current_user.friends}
+      else
+        redirect_to user_url(params[:user_id])
+      end
     else
       flash[:errors] = friendship.errors.full_messages
       # temporary - eventually should render json
@@ -23,8 +27,13 @@ class FriendshipsController < ApplicationController
     )
 
     if new_friendship.save
-      flash[:notice] = ["You have a new friend!"]
-      redirect_to user_url(new_friendship.inbound_friend_id)
+
+      if request.xhr?
+        render partial: 'friends/index', locals: {friends: current_user.friends}
+      else
+        flash[:notice] = ["You have a new friend!"]
+        redirect_to user_url(new_friendship.inbound_friend_id)
+      end
     else
       flash[:errors] = new_friendship.errors.full_messages
       redirect_to user_friends_url(current_user)
@@ -45,16 +54,18 @@ class FriendshipsController < ApplicationController
       # how can i raise and rescue errors?
       friendship1.destroy
       friendship2.destroy
-      redirect_to user_friends_url(current_user)
     elsif friendship1
       friendship1.destroy
-      redirect_to user_friends_url(current_user)
     elsif friendship2
       friendship2.destory
-      redirect_to user_friends_url(current_user)
     else
       flash[:errors] = ["We're sorry: something went wrong"]
-      redirect_to root_url
+    end
+
+    if request.xhr?
+      render partial: 'friends/index', locals: {friends: current_user.friends}
+    else
+      redirect_to user_friends_url(current_user)
     end
   end
 end

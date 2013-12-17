@@ -37,6 +37,9 @@
 
   $(document).ready(function(event) {
     // do i need to worry about garbage collection?
+
+    $("header").off();
+
     $("header").on("ajax:success", "a", function(event, data) {
       $(".content").html(data);
     });

@@ -25,6 +25,8 @@
 
   $(document).ready(function(event) {
 
+    $(".new-post").off();
+
     $(".new-post").on("ajax:success", function(event, data) {
       $(".posts").prepend(data);
       this.reset();

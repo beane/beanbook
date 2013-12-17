@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     if request.xhr?
-      render partial: 'layouts/users_index', locals: {users: @users}
+      render partial: 'users/index', locals: {users: @users}
     else
       render :index
     end
