@@ -1,0 +1,7 @@
+<h2>Conversations</h2>
+<ul class="conversations">
+  <% @conversations.keys.each do |convo_id| %>
+    <% other_user = Conversation.find(convo_id).other_user(current_user) %>
+    <li><a href="<%= conversation_url(convo_id) %>"><%= other_user.name %></a></li>
+  <% end %>
+</ul>

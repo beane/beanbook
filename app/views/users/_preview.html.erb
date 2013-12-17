@@ -1,14 +1,16 @@
 <% photo = user.profile_photo %>
 <% url = user_url(user) %>
 
-<div class="preview-photo">
-  <a href="<%= url %>">
-    <%= photo ? image_tag(photo.photo_file.url(:small)) : "" %>
-  </a>
-</div>
+<div class="clearfix">
+  <div class="preview-photo">
+    <a href="<%= url %>">
+      <%= photo ? image_tag(photo.photo_file.url(:small)) : "" %>
+    </a>
+  </div>
 
-<div class="preview-name">
-  <a href="<%= url %>">
-    <%= user.name %>
-  </a>
+  <div class="preview-name">
+    <a href="<%= url %>">
+      <%= user.name %>
+    </a>
+  </div>
 </div>

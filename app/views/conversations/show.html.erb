@@ -1,0 +1,8 @@
+<h2>Your Conversation with <%= @conversation.other_user(current_user).first_name %> </h2>
+<ul class="messages">
+  <% @conversation.messages.reverse.each do |message| %>
+    <li> <%= render partial: "users/preview", locals: {user: message.sender} %> <%= message.body %></li>
+  <% end %>
+</ul>
+
+<a href="<%= conversations_url %>"><< Back to Conversations</a>

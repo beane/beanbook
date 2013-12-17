@@ -103,6 +103,18 @@ class User < ActiveRecord::Base
     foreign_key: :recipient_id
   )
 
+  has_many(
+    :sent_messages,
+    class_name: "Message",
+    foreign_key: :sender_id
+  )
+
+  has_many(
+    :received_messages,
+    class_name: "Message",
+    foreign_key: :recipient_id
+  )
+
   def name
     "#{self.first_name} #{self.last_name}"
   end
@@ -112,6 +124,17 @@ class User < ActiveRecord::Base
     friendship = Friendship
       .find_by_inbound_friend_id_and_outbound_friend_id(self.id, user_id)
     !!friendship && !friendship.pending
+  end
+
+  def hashed_messages
+    hash = Hash.new { [] }
+
+    messages = (sent_messages + received_messages).uniq.sort_by { |i| i.created_at}
+    messages.each do |message|
+      hash[message.conversation_id] += [message]
+    end
+
+    hash
   end
 
   # authentication

@@ -11,7 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131213172018) do
+ActiveRecord::Schema.define(:version => 20131217220034) do
+
+  create_table "conversations", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "friendships", :force => true do |t|
     t.integer  "inbound_friend_id",                    :null => false
@@ -23,6 +28,18 @@ ActiveRecord::Schema.define(:version => 20131213172018) do
 
   add_index "friendships", ["inbound_friend_id", "outbound_friend_id"], :name => "index_friendships_on_inbound_friend_id_and_outbound_friend_id", :unique => true
   add_index "friendships", ["inbound_friend_id", "pending"], :name => "index_friendships_on_inbound_friend_id_and_pending"
+
+  create_table "messages", :force => true do |t|
+    t.integer  "conversation_id"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.text     "body"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "messages", ["conversation_id"], :name => "index_messages_on_conversation_id"
+  add_index "messages", ["sender_id"], :name => "index_messages_on_sender_id"
 
   create_table "notifications", :force => true do |t|
     t.integer  "sender_id"
