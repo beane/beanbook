@@ -13,6 +13,6 @@ This is a facebook clone - my final project for App Academy. It can be found [he
 ## Features
 - Friendships
 - Posts (create, edit, and delete)
-- Photo upload
+- Photo upload and deletion
 - Photo tagging
 - Automatic notification
