@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   attr_accessible :author_id, :recipient_id, :body
 
   validates :author_id, :recipient_id, :body, presence: true
-  validate :author_is_friends_with_recipient
+  validate :author_is_friends_with_recipient, :editor_is_author
 
   after_create :send_notification
 
@@ -47,6 +47,13 @@ class Post < ActiveRecord::Base
       end
     end
 
+    def editor_is_author
+      # this is happeneing before the save, so I can check if this post
+      # is in the supposed author's posts
+      if id && !User.find(author_id).authored_posts.map(&:id).include?(id)
+        errors.add("You", "must own a post to edit it.")
+      end
+    end
 
     def send_notification
       return if recipient_id == author_id

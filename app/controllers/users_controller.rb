@@ -4,11 +4,23 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    render :index
+    if request.xhr?
+      render partial: 'layouts/users_index', locals: {users: @users}
+    else
+      render :index
+    end
   end
 
   def new
     render :new
+  end
+
+  def edit
+    if request.xhr?
+      render partial: 'users/edit'
+    else
+      render :edit
+    end
   end
 
   def create

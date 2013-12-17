@@ -1,6 +1,11 @@
 class TagsController < ApplicationController
   def index
     @tags = User.find(params[:user_id]).tags
+    if request.xhr?
+      render partial: 'tags/index'
+    else
+      render :index
+    end
   end
 
   def create

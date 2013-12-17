@@ -23,8 +23,8 @@
     </time>
 
     <% if author == current_user %>
-      <div class="edit-link" data-remote="true">
-        <a href="<%= edit_user_post_url(author, post) %>">Edit</a>
+      <div class="edit-link">
+        <a href="<%= edit_user_post_url(author, post) %>" data-remote="true">Edit</a>
       </div>
     <% end %>
 

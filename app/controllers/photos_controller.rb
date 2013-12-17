@@ -1,11 +1,19 @@
 class PhotosController < ApplicationController
   def index
     @photos = Photo.where({user_id: params[:user_id]}).order(:created_at)
-    render :index
+    if request.xhr?
+      render partial: 'photos/index', locals: {photos: @photos}
+    else
+      render :index
+    end
   end
 
   def new
-    render :new
+    if request.xhr?
+      render partial: 'photos/new'
+    else
+      render :new
+    end
   end
 
   def create

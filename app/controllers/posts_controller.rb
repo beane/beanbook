@@ -30,18 +30,28 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    render :edit
+    if request.xhr?
+      render(partial: 'posts/form', locals: {post: @post, user: User.find(params[:user_id])})
+    else
+      render :edit
+    end
   end
 
   def update
     post = Post.find(params[:id])
+    post.author_id = current_user.id # for the model validation
+
     if post.update_attributes(params[:post])
       flash[:notice] = ["Your post has been updated."]
-      redirect_to user_url(params[:user_id])
+      if request.xhr?
+        render partial: 'posts/show', locals: {post: post}
+      else
+        redirect_to user_url(params[:user_id])
+      end
     else
       # maybe change all the flashes to flash.now
       flash[:errors] = post.errors.full_messages
-      redirect_to edit_user_post_url(current_user, post)
+      render partial: 'layouts/errors'
     end
   end
 

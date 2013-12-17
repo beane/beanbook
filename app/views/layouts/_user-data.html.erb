@@ -9,14 +9,3 @@
   <li><a href="<%= new_user_url %>">Sign Up</a></li>
 <% end %>
 </ul>
-
-<script>
-
-  $(document).ready(function(event) {
-    // do i need to worry about event listeners?
-    $("a").on("ajax:success", function(event, data) {
-      $(".content").html(data);
-    });
-
-  });
-</script>

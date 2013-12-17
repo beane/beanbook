@@ -23,7 +23,7 @@
 
 <script>
 
-  $("document").ready(function(event) {
+  $(document).ready(function(event) {
 
     $(".new-post").on("ajax:success", function(event, data) {
       $(".posts").prepend(data);
@@ -31,4 +31,5 @@
     });
 
   });
+
 </script>

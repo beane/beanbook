@@ -1,10 +1,1 @@
-<h2>ALL the Friends!</h2>
-
-<h3>Your friends</h3>
-<%= render(partial: 'layouts/users_index', locals: {users: @friends}) %>
-
-<h3>Requests Awaiting Your Approval</h3>
-<%= render(partial: 'layouts/users_index', locals: {users: current_user.inbound_pending_friends}) %>
-
-<h3>Pending Requests</h3>
-<%= render(partial: 'layouts/users_index', locals: {users: current_user.outbound_pending_friends}) %>
+<%= render partial: 'friends/index', locals: {friends: @friends} %>

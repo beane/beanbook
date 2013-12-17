@@ -33,6 +33,7 @@ body {
   font-size: 20px;
   background: lightgray;
   overflow: scroll;
+  margin-bottom: 50px;
 }
 
 a, a:visited {
@@ -66,8 +67,8 @@ input[type=text]:focus, input[type=password]:focus, input[type=file]:focus, text
 }
 
 textarea {
-  max-width: 735px;
-  min-width: 735px;
+  max-width: 600px;
+  min-width: 600px;
 }
 
 h3 {

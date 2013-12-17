@@ -1,0 +1,14 @@
+<h2>Upload a New Photo</h2>
+<form action="<%= user_photos_url(current_user) %>" method="POST" enctype="multipart/form-data">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label>Photo:
+    <input type="file" name="photo[photo_file]">
+  </label>
+
+  <label>Caption (optional):
+    <input type="text" name="photo[caption]">
+  </label>
+
+  <input type="submit" value="Submit">
+</form>
