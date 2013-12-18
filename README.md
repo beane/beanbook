@@ -19,9 +19,11 @@ This is a facebook clone - my final project for App Academy. It can be found [he
 - Photo upload and deletion
 - Photo tagging
 - Automatic notification
+- Messaging
 
 ## To do
-- Messaging
+- Likes
+- Comments
 - JavaScriptify photo tagging
 - Auto refresh page for notifications
 - Email confirmation
