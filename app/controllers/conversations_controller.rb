@@ -1,6 +1,6 @@
 class ConversationsController < ApplicationController
   def index
-    @conversations = current_user.hashed_messages
+    @conversations = current_user.conversations
     render :index
   end
 

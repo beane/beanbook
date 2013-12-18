@@ -115,6 +115,10 @@ class User < ActiveRecord::Base
     foreign_key: :recipient_id
   )
 
+  has_many :conversation_users
+
+  has_many :conversations, through: :conversation_users
+
   def name
     "#{self.first_name} #{self.last_name}"
   end

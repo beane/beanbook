@@ -1,7 +1,8 @@
-<h2>Your Conversation with <%= @conversation.other_user(current_user).first_name %> </h2>
+<h2>Your Conversation with <%= (@conversation.users - [current_user]).map(&:first_name).join(", ") %></h2>
 <ul class="messages">
   <% @conversation.messages.reverse.each do |message| %>
-    <li> <%= render partial: "users/preview", locals: {user: message.sender} %> <%= message.body %></li>
+  <li><%= message.sender.name %>: <%= message.body %></li>
+    <!-- <li> <%= render partial: "users/preview", locals: {user: message.sender} %> <%= message.body %></li> -->
   <% end %>
 </ul>
 
