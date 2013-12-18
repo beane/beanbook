@@ -20,6 +20,7 @@ This is a facebook clone - my final project for App Academy. It can be found [he
 - Photo tagging
 - Automatic notification
 - Messaging
+- Liking
 
 ## To do
 - Comments
