@@ -6,4 +6,33 @@
   <% end %>
 </ul>
 
+<form action="<%= conversation_url(@conversation) %>" method="post">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
+  <input type="hidden" name="_method" value="put">
+
+  <h3>Got something to say?</h3>
+
+  <textarea name="message_attributes[body]" placeholder=" Your message here."></textarea>
+
+  <h3>Add someone to this conversation</h3>
+  <ul class="users-for-conversation">
+    <% User.all.each do |user| %>
+      <% next if @conversation.users.include?(user)%>
+      <label>
+        <input
+          type="checkbox"
+          name="conversation[user_ids][]"
+          value="<%= user.id %>"> <%= user.name %>
+      </label>
+    <% end %>
+  </ul>
+
+
+  <input type="submit" value="Send your message">
+</form>
+
 <a href="<%= conversations_url %>"><< Back to Conversations</a>

@@ -109,15 +109,9 @@ class User < ActiveRecord::Base
     foreign_key: :sender_id
   )
 
-  has_many(
-    :received_messages,
-    class_name: "Message",
-    foreign_key: :recipient_id
-  )
+  has_many :conversation_users, inverse_of: :user
 
-  has_many :conversation_users
-
-  has_many :conversations, through: :conversation_users
+  has_many :conversations, through: :conversation_users, inverse_of: :users
 
   def name
     "#{self.first_name} #{self.last_name}"

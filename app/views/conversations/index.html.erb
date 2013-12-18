@@ -4,3 +4,5 @@
     <li><a href="<%= conversation_url(conversation.id) %>"><%= conversation.users.map(&:first_name).join(", ") %></a></li>
   <% end %>
 </ul>
+
+<%= render partial: 'conversations/new' %>
