@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131218162102) do
+ActiveRecord::Schema.define(:version => 20131218190700) do
 
   create_table "conversation_users", :force => true do |t|
     t.integer  "conversation_id"
@@ -99,6 +99,16 @@ ActiveRecord::Schema.define(:version => 20131218162102) do
   end
 
   add_index "tags", ["taggable_id", "taggable_type"], :name => "index_tags_on_taggable_id_and_taggable_type"
+
+  create_table "user_likes", :force => true do |t|
+    t.integer  "likable_id"
+    t.string   "likable_type"
+    t.integer  "liker_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "user_likes", ["likable_id"], :name => "index_user_likes_on_likable_id"
 
   create_table "users", :force => true do |t|
     t.string   "first_name"

@@ -24,4 +24,6 @@ class Photo < ActiveRecord::Base
     through: :tags,
     source: :taggee
   )
+
+  has_many :user_likes, as: :likable, dependent: :destroy
 end

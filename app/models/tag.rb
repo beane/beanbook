@@ -53,7 +53,7 @@ class Tag < ActiveRecord::Base
       end
 
       if tagger_id != taggable.user_id && !User.find(tagger_id).friends.map(&:id).include?(taggable.user_id)
-        errors.add(:taggable_id, "must belong to one of your friends")
+        errors.add(:taggable_type, "must belong to one of your friends")
       end
     end
 

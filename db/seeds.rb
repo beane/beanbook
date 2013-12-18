@@ -195,3 +195,67 @@ Tag.create!(
   tagger_id: goku.id,
   taggee_id: brian.id
 )
+
+# create some conversations and messages
+
+bm = Conversation.create
+bm.user_ids = [brian.id, margaret.id]
+
+bgm = Conversation.create
+bgm.user_ids = [brian.id, goku.id, margaret.id]
+
+james_bond = Conversation.create
+james_bond.user_ids = [brian.id, m.id]
+
+bm.messages.create!(
+  sender_id: brian.id,
+  body: "Hey there! How have you been?"
+)
+
+bm.messages.create!(
+  sender_id: margaret.id,
+  body: "Mighty fine, and yourself?"
+)
+
+bgm.messages.create!(
+  sender_id: brian.id,
+  body: "Goku, save us!"
+)
+
+bgm.messages.create!(
+  sender_id: goku.id,
+  body: "Seriously, stop that!"
+)
+
+bgm.messages.create!(
+  sender_id: margaret.id,
+  body: "I'm with Brian on this one."
+)
+
+james_bond.messages.create!(
+  sender_id: m.id,
+  body: "I am very secretive..."
+)
+
+james_bond.messages.create!(
+  sender_id: brian.id,
+  body: "Yeah, I get that."
+)
+
+UserLike.create!(
+  likable_type: "Photo",
+  likable_id: beach.id,
+  liker_id: brian.id
+)
+
+UserLike.create!(
+  likable_type: "Photo",
+  likable_id: burger.id,
+  liker_id: brian.id
+)
+
+UserLike.create!(
+  likable_type: "Photo",
+  likable_id: beach.id,
+  liker_id: goku.id
+)

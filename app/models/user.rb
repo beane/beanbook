@@ -113,6 +113,12 @@ class User < ActiveRecord::Base
 
   has_many :conversations, through: :conversation_users, inverse_of: :users
 
+  has_many(
+    :likes,
+    class_name: "UserLike",
+    foreign_key: :liker_id
+  )
+
   def name
     "#{self.first_name} #{self.last_name}"
   end

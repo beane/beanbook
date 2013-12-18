@@ -22,17 +22,11 @@ class Post < ActiveRecord::Base
 
   has_many :tags, as: :taggable, dependent: :destroy
 
-  has_many(
-    :tagged_users,
-    through: :tags,
-    source: :taggee
-  )
+  has_many :tagged_users, through: :tags, source: :taggee
 
-  has_many(
-    :notifications,
-    as: :notifiable,
-    dependent: :destroy
-  )
+  has_many :notifications, as: :notifiable, dependent: :destroy
+
+  has_many :user_likes, as: :likable, dependent: :destroy
 
   private
 
