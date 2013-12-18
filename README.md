@@ -22,10 +22,11 @@ This is a facebook clone - my final project for App Academy. It can be found [he
 - Messaging
 
 ## To do
-- Likes
 - Comments
-- JavaScriptify photo tagging
+- JavaScriptify photo tagging, liking, comments, photo views, messaging
 - Auto refresh page for notifications
 - Email confirmation
 - Confirm password on sign up
-- JavaScriptify friending
+- Make more awesome CSS
+- OmniAuth
+- Make RSpec test for models
