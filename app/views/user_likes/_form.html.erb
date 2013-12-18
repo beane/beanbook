@@ -23,7 +23,7 @@
 
   <input type="hidden" name="_method" value="<%= method %>">
 
-  <input type="hidden" name="like[likable_type]" value="Post">
+  <input type="hidden" name="like[likable_type]" value="<%= type %>">
   <input type="hidden" name="like[likable_id]" value="<%= post.id %>">
 
   <input type="submit" value="<%= message %>">

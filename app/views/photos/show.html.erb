@@ -28,9 +28,11 @@
   </form>
 </figure>
 
+<!-- likes information -->
+
 <div class="likes">
   <p>
-    <%= @photo.user_likes.count %> likes
+    <%= render partial: 'user_likes/form', locals: {post: @photo, type: "Photo"} %>
   </p>
 </div>
 

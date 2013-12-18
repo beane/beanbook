@@ -18,6 +18,8 @@ class UserLike < ActiveRecord::Base
     foreign_key: :liker_id
   )
 
+  has_many :notifications, as: :notifiable, dependent: :destroy
+
   private
     def must_be_unique
       if UserLike.where(
