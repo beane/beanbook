@@ -259,3 +259,15 @@ UserLike.create!(
   likable_id: beach.id,
   liker_id: goku.id
 )
+
+UserLike.create!(
+  likable_type: "Post",
+  likable_id: brian_status.id,
+  liker_id: brian.id
+)
+
+UserLike.create!(
+  likable_type: "Post",
+  likable_id: brian_status.id,
+  liker_id: goku.id
+)

@@ -78,8 +78,8 @@ class Notification < ActiveRecord::Base
       }
 
     when "UserLike"
-      p notifiable
       likable = notifiable.likable
+
       if likable.class == Photo
         {
           controller: "photos",

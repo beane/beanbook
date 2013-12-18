@@ -61,18 +61,18 @@ class UserLike < ActiveRecord::Base
         Notification.create(
           sender_id: liker_id,
           recipient_id: likable.user_id,
-          notifiable_id: likable.id,
+          notifiable_id: id,
           notifiable_type: "UserLike",
           message: "#{User.find(liker_id).name} liked your photo!"
         )
 
       elsif likable_type == "Post"
-        return if liker_id == likable.author_id
+        return if liker_id == likable.recipient_id
 
         Notification.create(
           sender_id: liker_id,
           recipient_id: likable.author_id, # the only major difference
-          notifiable_id: likable.id,
+          notifiable_id: id,
           notifiable_type: "UserLike",
           message: "#{User.find(liker_id).name} liked your post!"
         )
