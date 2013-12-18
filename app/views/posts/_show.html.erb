@@ -31,7 +31,14 @@
     <% if author == current_user || current_user.id == post.recipient_id %>
       <%= button_to "Delete", user_post_url(current_user, post), method: :delete %>
     <% end %>
+
+    <div class="likes">
+      <p>
+        <%= render partial: 'user_likes/form', locals: {post: post} %>
+      </p>
+    </div>
   </footer>
+
 </article>
 
 

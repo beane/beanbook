@@ -4,7 +4,7 @@ class Message < ActiveRecord::Base
   validates :body, :conversation_id, :sender_id, presence: true
   validate :can_only_send_if_member_of_conversation
 
-  after_create :notify
+  after_create :send_notifications
 
   belongs_to(
     :sender,
@@ -23,7 +23,7 @@ class Message < ActiveRecord::Base
       end
     end
 
-    def notify
+    def send_notifications
       sender_name = User.find(sender_id).name
       (self.conversation.user_ids - [sender_id]).each do |user_id|
         Notification.create(

@@ -8,6 +8,8 @@ class UserLike < ActiveRecord::Base
     :can_only_like_friends_object
   )
 
+  after_create :send_notifications
+
   belongs_to :likable, polymorphic: true
 
   belongs_to(
@@ -32,7 +34,7 @@ class UserLike < ActiveRecord::Base
       likable = self.likable
       # see if taggable.user_id is either mine or one of my friends'
       if !likable
-        errors.add(likable_type, "does not exist")
+        errors.add("That", "does not exist")
       end
 
       liker = User.find(liker_id)
@@ -40,13 +42,38 @@ class UserLike < ActiveRecord::Base
 
       if likable_type == "Photo"
         unless liker_id == likable.user_id || friends.include?(User.find(likable.user_id))
-          errors.add("Photo", "must belong to your friend")
+          errors.add(likable_type, "must belong to your friend")
         end
 
       elsif likable_type == "Post"
         unless liker_id == likable.author_id || friends.include?(User.find(likable.author_id))
-          errors.add("Post", "must belong to your friend")
+          errors.add(likable_type, "must belong to your friend")
         end
+      end
+    end
+
+    def send_notifications
+      if likable_type == "Photo"
+        return if liker_id == likable.user_id
+
+        Notification.create(
+          sender_id: liker_id,
+          recipient_id: likable.user_id,
+          notifiable_id: likable.id,
+          notifiable_type: "UserLike",
+          message: "#{User.find(liker_id).name} liked your photo!"
+        )
+
+      elsif likable_type == "Post"
+        return if liker_id == likable.author_id
+
+        Notification.create(
+          sender_id: liker_id,
+          recipient_id: likable.author_id, # the only major difference
+          notifiable_id: likable.id,
+          notifiable_type: "UserLike",
+          message: "#{User.find(liker_id).name} liked your post!"
+        )
       end
     end
 end

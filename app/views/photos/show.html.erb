@@ -28,6 +28,12 @@
   </form>
 </figure>
 
+<div class="likes">
+  <p>
+    <%= @photo.user_likes.count %> likes
+  </p>
+</div>
+
 <div class="tagging-users">
   <%= render(partial: 'tags/tagged_users', locals: {object: @photo}) %>
 </div>

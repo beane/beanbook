@@ -17,7 +17,7 @@ class Notification < ActiveRecord::Base
     presence: true
   )
 
-  validates :notifiable_type, inclusion: {in: %w( Tag Friendship Post Message )}
+  validates :notifiable_type, inclusion: {in: %w( Tag Friendship Post Message UserLike)}
 
   belongs_to(
     :recipient,
@@ -74,8 +74,25 @@ class Notification < ActiveRecord::Base
       {
         controller: "conversations",
         action: "show",
-        id: id
+        id: notifiable.conversation.id # the notifiable is a message, the route is a conversation
       }
+
+    when "UserLike"
+      likable = notifiable.likable
+      if likable.class == Photo
+        {
+          controller: "photos",
+          action: "show",
+          id: likable.id,
+          user_id: likable.user_id
+        }
+      elsif likable.class == Post
+        {
+          controller: "posts",
+          action: "show",
+          id: likable.id
+        }
+      end
     end
   end
 end
