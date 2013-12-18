@@ -17,7 +17,7 @@ class Notification < ActiveRecord::Base
     presence: true
   )
 
-  validates :notifiable_type, inclusion: {in: %w( Tag Friendship Post )}
+  validates :notifiable_type, inclusion: {in: %w( Tag Friendship Post Message )}
 
   belongs_to(
     :recipient,
@@ -69,6 +69,13 @@ class Notification < ActiveRecord::Base
           user_id: recipient_id
         }
       end
+
+    when "Message"
+      {
+        controller: "conversations",
+        action: "show",
+        id: id
+      }
     end
   end
 end
