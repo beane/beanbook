@@ -29,9 +29,10 @@ class PhotosController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:user_id])
     @photo = Photo.find(params[:id])
     if request.xhr?
-      render partial: 'photos/show', locals: {photo: @photo}
+      render partial: 'photos/show', locals: {user: @user, photo: @photo}
     else
       render :show
     end

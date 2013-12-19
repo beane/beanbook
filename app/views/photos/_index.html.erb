@@ -1,9 +1,23 @@
 <h2><%= User.find(params[:user_id]).first_name %>'s Photos</h2>
 
-<% photos.each do |photo| %>
-  <figure class="preview-photo">
-    <a href="<%= user_photo_url(params[:user_id], photo.id) %>">
-      <%= image_tag photo.photo_file.url(:small) %>
-    </a>
-  </figure>
-<% end %>
+<div class="photos">
+  <% photos.each do |photo| %>
+    <figure class="preview-photo">
+      <a href="<%= user_photo_url(params[:user_id], photo.id) %>" data-remote="true">
+        <%= image_tag photo.photo_file.url(:small) %>
+      </a>
+    </figure>
+  <% end %>
+</div>
+
+<script>
+
+$(document).ready(function(event) {
+  $(".preview-photo").off();
+
+  $(".preview-photo").on("ajax:success", "a", function(event, data) {
+    $(".content").html(data);
+  });
+});
+
+</script>

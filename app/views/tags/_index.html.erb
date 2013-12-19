@@ -6,7 +6,7 @@
       <!-- FOR NOW THIS IS JUST A PHOTO - IT WILL CAUSE PROBLEMS LATER -->
       <!-- I can have a conditional that checks for the url depending on the class -->
       <figure class="preview-photo">
-        <a href="<%= user_photo_url(taggable.user_id, taggable.id) %>">
+        <a href="<%= user_photo_url(taggable.user_id, taggable.id) %>" data-remote="true">
           <%= image_tag(taggable.photo_file.url(:small)) %>
           <figcaption>
             <%= taggable.class %>
@@ -17,3 +17,16 @@
     </li>
   <% end %>
 </ul>
+
+<script>
+
+$(document).ready(function(event) {
+  $(".preview-photo").off();
+
+  $(".preview-photo").on("ajax:success", "a", function(event, data) {
+    $(".content").html(data);
+  });
+});
+
+</script>
+

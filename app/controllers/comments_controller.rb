@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
         render partial: 'comments/show', locals: {comment: comment}
       else
         flash[:errors] = comment.errors.full_messages
+        redirect_to root_url
       end
     else
       redirect_to root_url
