@@ -3,28 +3,35 @@
 <% like_index = like_ids.index(current_user.id) %>
 <% like_id = likes[like_index].id if like_index %> <!-- I know this is weird -->
 
-<h4><%= likes.count %> likes</h4>
-
-<% if like_id %>
-  <% url = user_like_url(like_id) %>
-  <% method = "delete" %>
-  <% message = "Unlike" %>
-<% else %>
-  <% url = user_likes_url %>
-  <% message = "Like" %>
-<% end %>
+<div class="likes">
+  <h4><%= likes.count %> likes</h4>
 
 
-<form action="<%= url %>" method="post">
-  <input
-    type="hidden"
-    name="authenticity_token"
-    value="<%= form_authenticity_token %>">
+  <% user = (post.class == Post) ? post.author : post.user %>
+  <% if current_user == user || current_user.friends.include?(user) %>
 
-  <input type="hidden" name="_method" value="<%= method %>">
+    <% if like_id %>
+      <% url = user_like_url(like_id) %>
+      <% method = "delete" %>
+      <% message = "Unlike" %>
+    <% else %>
+      <% url = user_likes_url %>
+      <% message = "Like" %>
+    <% end %>
 
-  <input type="hidden" name="like[likable_type]" value="<%= type %>">
-  <input type="hidden" name="like[likable_id]" value="<%= post.id %>">
 
-  <input type="submit" value="<%= message %>">
-</form>
+    <form action="<%= url %>" method="post">
+      <input
+        type="hidden"
+        name="authenticity_token"
+        value="<%= form_authenticity_token %>">
+
+      <input type="hidden" name="_method" value="<%= method %>">
+
+      <input type="hidden" name="like[likable_type]" value="<%= type %>">
+      <input type="hidden" name="like[likable_id]" value="<%= post.id %>">
+
+      <input type="submit" value="<%= message %>">
+    </form>
+  <% end %>
+</div>

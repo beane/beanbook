@@ -30,11 +30,7 @@
 
 <!-- likes information -->
 
-<div class="likes">
-  <p>
-    <%= render partial: 'user_likes/form', locals: {post: @photo, type: "Photo"} %>
-  </p>
-</div>
+<%= render partial: 'user_likes/form', locals: {post: @photo, type: "Photo"} %>
 
 <div class="tagging-users">
   <%= render(partial: 'tags/tagged_users', locals: {object: @photo}) %>
@@ -59,5 +55,16 @@
   </ul>
 
 <% end %>
+
+<!-- show comments -->
+
+<%= render partial: 'comments/index', locals: {object: @photo} %>
+
+<%= render partial: 'comments/form', locals: {object: @photo} %>
+
+<!-- new comment form -->
+
+
+<!-- back to photos -->
 
 <a href="<%= user_photos_url(params[:user_id]) %>"><< Back to Photos</a>

@@ -8,9 +8,11 @@ Beanbook::Application.routes.draw do
     resources :tags, only: [:index, :create, :destroy]
   end
 
+  resources :comments, only: [:create, :destroy]
   resources :user_likes, only: [:index, :create, :destroy]
   resources :conversations, except: :destroy
   resources :posts, only: :show
   resources :notifications, only: :index
+
   root to: "feeds#show"
 end

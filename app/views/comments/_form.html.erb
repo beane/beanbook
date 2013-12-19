@@ -1,0 +1,20 @@
+<% user = (object.class == Post) ? object.author : object.user %>
+<% if current_user == user || current_user.friends.include?(user) %>
+
+<h4>New Comment</h4>
+<form action="<%= comments_url %>" method="post">
+
+  <input type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
+  <input type="hidden" name="comment[commentable_id]" value="<%= object.id %>">
+
+  <input type="hidden" name="comment[commentable_type]" value="<%= object.class.to_s %>">
+
+  <input type="text" name="comment[body]">
+
+  <input type="submit" value="Submit Comment!">
+</form>
+
+<% end %>

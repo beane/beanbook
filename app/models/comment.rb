@@ -39,7 +39,7 @@ class Comment < ActiveRecord::Base
 
     def can_only_comment_on_friends_objects
       commentable = self.commentable
-      # see if taggable.user_id is either mine or one of my friends'
+
       if !commentable
         errors.add("That", "does not exist")
       end
@@ -48,12 +48,12 @@ class Comment < ActiveRecord::Base
       commenter = User.find(user_id)
 
       if commentable_type == "Photo"
-        unless commentable_id == commentable.user_id || friends.include?(User.find(commentable.user_id))
+        unless user_id == commentable.user_id || friends.include?(User.find(commentable.user_id))
           errors.add(commentable_type, "must belong to your friend")
         end
 
       elsif commentable_type == "Post"
-        unless commentable_id == commentable.author_id || friends.include?(User.find(commentable.author_id))
+        unless user_id == commentable.author_id || friends.include?(User.find(commentable.author_id))
           errors.add(commentable_type, "must belong to your friend")
         end
       end

@@ -13,7 +13,8 @@ class UserLikesController < ApplicationController
     if @like.save
       redirect_to root_url
     else
-      fail
+      flash[:errors] = @like.errors.full_messages
+      redirect_to root_url
     end
   end
 

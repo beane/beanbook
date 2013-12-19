@@ -32,13 +32,17 @@
       <%= button_to "Delete", user_post_url(current_user, post), method: :delete %>
     <% end %>
 
-    <div class="likes">
-      <p>
-        <%= render partial: 'user_likes/form', locals: {post: post, type: "Post"} %>
-      </p>
-    </div>
+
+    <%= render partial: 'user_likes/form', locals: {post: post, type: "Post"} %>
+
   </footer>
 
+  <!-- show comments -->
+
+  <h4>Comments</h4>
+  <%= render partial: 'comments/index', locals: {object: post} %>
+
+  <%= render partial: 'comments/form', locals: {object: post} %>
 </article>
 
 

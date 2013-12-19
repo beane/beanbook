@@ -1,0 +1,7 @@
+<ul class="comments">
+
+<% object.comments.each do |comment| %>
+  <li><%= comment.author.name %>: <%= comment.body %></li>
+<% end %>
+
+</ul>
