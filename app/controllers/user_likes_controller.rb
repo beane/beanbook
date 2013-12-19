@@ -1,20 +1,33 @@
 class UserLikesController < ApplicationController
-  # these will eventually be ajax requests
-
-  def create
-    @like = UserLike.new(params[:like])
+  def update
+    @like = UserLike.new
     @like.liker_id = current_user.id
+    @like.likable_type = params[:user_id].capitalize # hackety hack
+    @like.likable_id = params[:id]
 
     if @like.save
-      redirect_to root_url
+      if request.xhr?
+        render json: {increment: 1}
+      else
+        redirect_to root_url
+      end
     else
-      flash[:errors] = @like.errors.full_messages
       redirect_to root_url
     end
   end
 
   def destroy
-    UserLike.find(params[:id]).destroy
-    redirect_to root_url
+    if UserLike.find_by_likable_id_and_likable_type(
+      params[:id],
+      params[:user_id].capitalize
+    ).destroy
+      if request.xhr?
+        render json: {increment: -1}
+      else
+        redirect_to root_url
+      end
+    else
+      redirect_to root_url
+    end
   end
 end

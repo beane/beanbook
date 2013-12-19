@@ -329,3 +329,17 @@ figure figcaption {
 .new-post {
   width: 725;
 }
+
+/* likes */
+
+.unlike {
+  display: none;
+}
+
+.likes.can-unlike .like {
+  display: none;
+}
+
+.likes.can-unlike .unlike {
+  display: inline-block;
+}

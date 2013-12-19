@@ -30,7 +30,7 @@
 
 <!-- likes information -->
 
-<%= render partial: 'user_likes/form', locals: {post: @photo, type: "Photo"} %>
+<%= render partial: 'user_likes/form', locals: {object: @photo, type: "Photo"} %>
 
 <div class="tagging-users">
   <%= render(partial: 'tags/tagged_users', locals: {object: @photo}) %>

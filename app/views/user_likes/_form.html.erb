@@ -1,38 +1,58 @@
-<% likes = post.user_likes %>
+<% likes = object.user_likes %>
 <% like_ids = likes.map(&:liker_id) %>
 <% like_index = like_ids.index(current_user.id) %>
 <% like_id = likes[like_index].id if like_index %> <!-- I know this is weird -->
 
-<div class="likes">
-  <h4><%= likes.count %> likes</h4>
+
+<% if like_id %>
+  <% klass = " can-unlike" %>
+<% end %>
+
+<div class="likes<%= klass %>">
+  <h4><span class="count"><%= likes.count %></span> likes</h4>
 
 
   <!-- accounts for comments as well -->
-  <% user = (post.class == Photo) ? post.user : post.author %>
+  <% user = (object.class == Photo) ? object.user : object.author %>
   <% if current_user == user || current_user.friends.include?(user) %>
 
-    <% if like_id %>
-      <% url = user_like_url(like_id) %>
-      <% method = "delete" %>
-      <% message = "Unlike" %>
-    <% else %>
-      <% url = user_likes_url %>
-      <% message = "Like" %>
-    <% end %>
-
-
-    <form action="<%= url %>" method="post">
+    <form action="<%= user_user_like_url(user_id: type.downcase, id: object.id) %>" method="post" class="like" data-remote="true">
       <input
         type="hidden"
         name="authenticity_token"
         value="<%= form_authenticity_token %>">
 
-      <input type="hidden" name="_method" value="<%= method %>">
+      <input type="hidden" name="_method" value="put">
+      <input type="submit" value="Like">
+    </form>
 
-      <input type="hidden" name="like[likable_type]" value="<%= type %>">
-      <input type="hidden" name="like[likable_id]" value="<%= post.id %>">
+    <form action="<%= user_user_like_url(user_id: type.downcase, id: object.id) %>" method="post" class="unlike" data-remote="true">
+      <input
+        type="hidden"
+        name="authenticity_token"
+        value="<%= form_authenticity_token %>">
 
-      <input type="submit" value="<%= message %>">
+      <input type="hidden" name="_method" value="delete">
+
+      <input type="submit" value="Unlike">
     </form>
   <% end %>
 </div>
+
+<script>
+
+$(document).ready(function(event) {
+  // why does it show up for every form?
+  // why does this line help?
+  $(".likes").off();
+
+  $(".likes").on("ajax:success", "form", function(event, data) {
+    if (data["increment"]) { // if the server returns the right thing
+      $(this).parent().toggleClass("can-unlike");
+      var numLikes = $(this).parent().find("span.count");
+      numLikes.text(parseInt(numLikes.text()) + data["increment"]);
+    }
+  });
+});
+
+</script>

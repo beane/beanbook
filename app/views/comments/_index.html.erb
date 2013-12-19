@@ -8,7 +8,7 @@
       <%= button_to "Delete Comment", comment_url(comment), method: :delete %>
     <% end %>
 
-    <%= render partial: 'user_likes/form', locals: {post: comment, type: "Comment"} %>
+    <%= render partial: 'user_likes/form', locals: {object: comment, type: "Comment"} %>
   <% end %>
 
 </ul>
