@@ -258,7 +258,7 @@ Comment.create!(
 )
 
 dude = Comment.create!(
-  user_id: goku.id,
+  user_id: brian.id,
   body: "You mad dude?",
   commentable_id: Photo.first.id,
   commentable_type: "Photo"
@@ -309,5 +309,5 @@ UserLike.create!(
 UserLike.create!(
   likable_type: "Comment",
   likable_id: dude.id,
-  liker_id: brian.id
+  liker_id: goku.id
 )
