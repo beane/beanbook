@@ -1,0 +1,28 @@
+<h2>Conversations</h2>
+<ul class="conversations">
+  <% @conversations.each do |conversation| %>
+    <li><a href="<%= conversation_url(conversation.id) %>" data-remote="true"><%= conversation.users.map(&:first_name).join(", ") %></a></li>
+  <% end %>
+</ul>
+
+<%= render partial: 'conversations/new' %>
+
+<script>
+
+$(document).ready(function(event) {
+
+  $(".conversations").off();
+
+  $(".conversations").on("ajax:success", "li a", function(event, data) {
+    $(".content").html(data);
+  });
+
+  $(".new-conversation").off();
+
+  $(".new-conversation").on("ajax:success", function(event, data) {
+    $(".content").html(data);
+  });
+
+});
+
+</script>

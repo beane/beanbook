@@ -1,7 +1,11 @@
 class ConversationsController < ApplicationController
   def index
     @conversations = current_user.conversations
-    render :index
+    if request.xhr?
+      render partial: 'conversations/index', locals: {conversations: @conversations}
+    else
+      render :index
+    end
   end
 
   def show

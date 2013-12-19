@@ -37,7 +37,7 @@
   </form>
 </section>
 
-<a href="<%= conversations_url %>">&laquo; Back to Conversations</a>
+<a href="<%= conversations_url %>" data-remote="true" class="conversations-main-link">&laquo; Back to Conversations</a>
 
 <script>
 
@@ -45,7 +45,10 @@ $(document).ready(function() {
   $(".conversation").off();
 
   $(".conversation").on("ajax:success", ".new-message", function(event, data) {
-    console.log(data);
+    $(".content").html(data)
+  });
+
+  $(".conversations-main-link").on("ajax:success", function(event, data) {
     $(".content").html(data)
   });
 
