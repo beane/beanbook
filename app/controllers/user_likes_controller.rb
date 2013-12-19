@@ -1,9 +1,4 @@
 class UserLikesController < ApplicationController
-  def index
-    @likes = UserLike.find(params[:id]).likable.likes
-    render :index
-  end
-
   # these will eventually be ajax requests
 
   def create

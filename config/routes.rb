@@ -9,7 +9,7 @@ Beanbook::Application.routes.draw do
   end
 
   resources :comments, only: [:create, :destroy]
-  resources :user_likes, only: [:index, :create, :destroy]
+  resources :user_likes, only: [:create, :destroy]
   resources :conversations, except: :destroy
   resources :posts, only: :show
   resources :notifications, only: :index
