@@ -1,14 +1,26 @@
 <ul class="comments">
 
   <% object.comments.each do |comment| %>
-    <li><%= comment.author.name %>: <%= comment.body %></li>
-
-    <% user = comment.author %>
-    <% if current_user == user || current_user.friends.include?(user) %>
-      <%= button_to "Delete Comment", comment_url(comment), method: :delete %>
-    <% end %>
-
-    <%= render partial: 'user_likes/form', locals: {object: comment, type: "Comment"} %>
+    <li>
+      <%= render partial: 'comments/show', locals: {comment: comment} %>
+    </li>
   <% end %>
 
 </ul>
+
+<script>
+
+  $(document).ready(function(event) {
+
+    $(".new-comment").off();
+
+    $(".new-comment").on("ajax:success", function(event, data) {
+      var $comments = $(this).parent().find(".comments")
+      $comments.append("<li>" + data + "</li>");
+      this.reset();
+    });
+
+  });
+
+</script>
+

@@ -4,13 +4,14 @@ class PostsController < ApplicationController
     post.author_id = current_user.id
     post.recipient_id = params[:user_id]
 
-    if request.xhr?
-      if post.save
+
+    if post.save
+      if request.xhr?
         render partial: 'posts/show', locals: {post: post}
       else
         # flash[:errors] = post.errors.full_messages
         # this doesn't really do anything
-        render json: post
+        redirect_to user_url(params[:user_id])
       end
     else
       redirect_to user_url(params[:user_id])
@@ -37,15 +38,15 @@ class PostsController < ApplicationController
     end
   end
 
-  def update
+  def update # okay this breaks hard if there's no JS
     post = Post.find(params[:id])
     post.author_id = current_user.id # for the model validation
 
-    if post.update_attributes(params[:post])
-      flash[:notice] = ["Your post has been updated."]
-      if request.xhr?
+    if request.xhr?
+      if post.update_attributes(params[:post])
         render partial: 'posts/show', locals: {post: post}
       else
+        flash[:notice] = ["Your post has been updated."]
         redirect_to user_url(params[:user_id])
       end
     else

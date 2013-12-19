@@ -6,12 +6,11 @@ class ConversationsController < ApplicationController
 
   def show
     @conversation = Conversation.find(params[:id])
-  end
-
-  def new
-    @conversation = Conversation.new
-    # @conversation.messages.build
-    render :new
+    if request.xhr?
+      render partial: 'conversations/show', locals: {conversation: @conversation}
+    else
+      render :show
+    end
   end
 
   def create
@@ -27,8 +26,8 @@ class ConversationsController < ApplicationController
         flash[:notice] = ["Message sent!"]
         redirect_to conversation_url(c)
       rescue
-        flash[:errors] = c.errors.full_messages + c.messages.first.errors.full_messages
-        redirect_to new_conversation_url
+        flash[:errors] = c.errors.full_messages
+        redirect_to conversations_url
       end
     end
   end
@@ -60,11 +59,14 @@ class ConversationsController < ApplicationController
     end
 
     if c.save
-      flash[:notice] = message
+      if request.xhr?
+        render partial: 'conversations/show', locals: {conversation: c}
+      else
+        flash[:notice] = message
+      end
     else
-      flash[:errors] = ["Something went wrong :-()"]
+      flash[:errors] = ["Something went wrong :-("]
+      redirect_to conversation_url(c)
     end
-
-    redirect_to conversation_url(c)
   end
 end

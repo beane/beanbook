@@ -10,7 +10,7 @@ Beanbook::Application.routes.draw do
   end
 
   resources :comments, only: [:create, :destroy]
-  resources :conversations, except: :destroy
+  resources :conversations, except: [:new, :edit, :destroy]
   resources :posts, only: :show
   resources :notifications, only: :index
 
