@@ -28,6 +28,8 @@ class Post < ActiveRecord::Base
 
   has_many :user_likes, as: :likable, dependent: :destroy
 
+  has_many :comments, as: :commentable, dependent: :destroy
+
   private
 
     def author_is_friends_with_recipient
@@ -51,6 +53,7 @@ class Post < ActiveRecord::Base
 
     def send_notification
       return if recipient_id == author_id
+
       user = User.find(author_id)
       Notification.create(
         recipient_id: recipient_id,

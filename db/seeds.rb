@@ -242,6 +242,30 @@ james_bond.messages.create!(
   body: "Yeah, I get that."
 )
 
+
+mad = Comment.create!(
+  user_id: goku.id,
+  body: "You mad bro?",
+  commentable_id: Post.first.id,
+  commentable_type: "Post"
+)
+
+Comment.create!(
+  user_id: brian.id,
+  body: "Yup",
+  commentable_id: Post.first.id,
+  commentable_type: "Post"
+)
+
+Comment.create!(
+  user_id: goku.id,
+  body: "You mad bro?",
+  commentable_id: Photo.first.id,
+  commentable_type: "Photo"
+)
+
+# like some photos
+
 UserLike.create!(
   likable_type: "Photo",
   likable_id: beach.id,
@@ -260,6 +284,8 @@ UserLike.create!(
   liker_id: goku.id
 )
 
+# like some posts
+
 UserLike.create!(
   likable_type: "Post",
   likable_id: brian_status.id,
@@ -270,4 +296,12 @@ UserLike.create!(
   likable_type: "Post",
   likable_id: brian_status.id,
   liker_id: goku.id
+)
+
+# like a comment
+
+UserLike.create!(
+  likable_type: "Comment",
+  likable_id: mad.id,
+  liker_id: brian.id
 )

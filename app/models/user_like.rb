@@ -2,7 +2,7 @@ class UserLike < ActiveRecord::Base
   attr_accessible :likable_type, :likable_id, :liker_id
 
   validates :likable_type, :likable_id, :liker_id, presence: true
-  validates :likable_type, inclusion: {in: %w( Photo Post )}
+  validates :likable_type, inclusion: {in: %w( Photo Post Comment )}
   validate(
     :must_be_unique,
     :can_only_like_friends_object
@@ -42,7 +42,7 @@ class UserLike < ActiveRecord::Base
       liker = User.find(liker_id)
       friends = liker.friends
 
-      if likable_type == "Photo"
+      if likable_type == "Photo" || likable_type == "Comment"
         unless liker_id == likable.user_id || friends.include?(User.find(likable.user_id))
           errors.add(likable_type, "must belong to your friend")
         end
@@ -75,6 +75,17 @@ class UserLike < ActiveRecord::Base
           notifiable_id: id,
           notifiable_type: "UserLike",
           message: "#{User.find(liker_id).name} liked your post!"
+        )
+
+      elsif likable_type == "Comment"
+        return if liker_id == likable.user_id
+
+        Notification.create(
+          sender_id: liker_id,
+          recipient_id: likable.user_id,
+          notifiable_id: id,
+          notifiable_type: "Comment",
+          message: "#{User.find(liker_id).name} liked your comment!"
         )
       end
     end
