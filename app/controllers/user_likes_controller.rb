@@ -17,9 +17,10 @@ class UserLikesController < ApplicationController
   end
 
   def destroy
-    if UserLike.find_by_likable_id_and_likable_type(
+    if UserLike.find_by_likable_id_and_likable_type_and_liker_id(
       params[:id],
-      params[:user_id].capitalize
+      params[:user_id].capitalize,
+      current_user.id
     ).destroy
       if request.xhr?
         render json: {increment: -1}
