@@ -1,13 +1,13 @@
 <h2>View Photo</h2>
 
 <figure class="large-photo">
-  <%= image_tag @photo.photo_file.url(:big) %>
-  <figcaption><%= @photo.caption %></figcaption>
+  <%= image_tag photo.photo_file.url(:big) %>
+  <figcaption><%= photo.caption %></figcaption>
 
   <div class="change-photo">
     <% if params[:user_id].to_i == current_user.id %>
-      <a href="<%= edit_user_photo_url(params[:user_id], @photo) %>">Edit Photo</a>
-      <%= button_to "Delete Photo", user_photo_url(params[:user_id], @photo), method: :delete %>
+      <a href="<%= edit_user_photo_url(params[:user_id], photo) %>">Edit Photo</a>
+      <%= button_to "Delete Photo", user_photo_url(params[:user_id], photo), method: :delete %>
     <% end %>
   </div>
 
@@ -22,7 +22,7 @@
       name="authenticity_token"
       value="<%= form_authenticity_token %>">
 
-    <input type="hidden" name="user[profile_photo_id]" value="<%= @photo.id %>">
+    <input type="hidden" name="user[profile_photo_id]" value="<%= photo.id %>">
 
     <input type="submit" value="Make This Your Profile Picture">
   </form>
@@ -30,10 +30,10 @@
 
 <!-- likes information -->
 
-<%= render partial: 'user_likes/form', locals: {object: @photo, type: "Photo"} %>
+<%= render partial: 'user_likes/form', locals: {object: photo, type: "Photo"} %>
 
 <div class="tagging-users">
-  <%= render(partial: 'tags/tagged_users', locals: {object: @photo}) %>
+  <%= render(partial: 'tags/tagged_users', locals: {object: photo}) %>
 </div>
 
 <!-- tag friends if the photo belongs to you or your friends -->
@@ -43,7 +43,7 @@
   <h3>Tag Your Friends</h3>
 
   <ul>
-    <% tagged_users = @photo.tagged_users %>
+    <% tagged_users = photo.tagged_users %>
     <% (current_user.friends + [current_user]).each do |friend| %>
       <% next if tagged_users.include?(friend) %>
 
@@ -58,11 +58,11 @@
 
 <!-- show comments -->
 
-<%= render partial: 'comments/index', locals: {object: @photo} %>
+<%= render partial: 'comments/index', locals: {object: photo} %>
 
 <!-- new comment form -->
 
-<%= render partial: 'comments/form', locals: {object: @photo} %>
+<%= render partial: 'comments/form', locals: {object: photo} %>
 
 <!-- back to photos -->
 
