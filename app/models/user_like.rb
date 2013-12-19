@@ -84,7 +84,7 @@ class UserLike < ActiveRecord::Base
           sender_id: liker_id,
           recipient_id: likable.user_id,
           notifiable_id: id,
-          notifiable_type: "Comment",
+          notifiable_type: "UserLike",
           message: "#{User.find(liker_id).name} liked your comment!"
         )
       end

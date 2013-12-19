@@ -72,7 +72,7 @@ class Tag < ActiveRecord::Base
         sender_id: tagger_id,
         notifiable_id: id,
         notifiable_type: "Tag",
-        message: "#{user.first_name} tagged you in a #{taggable_type.downcase}!"
+        message: "#{user.name} tagged you in a #{taggable_type.downcase}!"
       )
     end
 

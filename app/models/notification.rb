@@ -95,9 +95,15 @@ class Notification < ActiveRecord::Base
         }
 
       elsif likable.class == Comment
-        {
-
+        hash = {
+          controller: likable.commentable.class.to_s.downcase.pluralize,
+          action: "show",
+          id: likable.commentable.id
         }
+
+        hash[:user_id] = likable.user_id if likable.commentable.class == Photo
+
+        hash
       end
 
     when "Comment"

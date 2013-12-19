@@ -65,7 +65,7 @@ class Post < ActiveRecord::Base
         sender_id: author_id,
         notifiable_id: id,
         notifiable_type: "Post",
-        message: "#{user.first_name} posted on your wall!"
+        message: "#{user.name} posted on your wall!"
       )
     end
 end
