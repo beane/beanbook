@@ -17,6 +17,12 @@ $(document).ready(function(event) {
     $(".content").html(data);
   });
 
+  $(".new-conversation").off();
+
+  $(".new-conversation").on("ajax:success", function(event, data) {
+    $(".content").html(data);
+  });
+
 });
 
 </script>

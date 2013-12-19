@@ -24,7 +24,12 @@ class ConversationsController < ApplicationController
         c.messages.create!(params[:message_attributes].merge(sender_id: current_user.id))
         c.save!
         flash[:notice] = ["Message sent!"]
-        redirect_to conversation_url(c)
+
+        if request.xhr?
+          render partial: 'conversations/show', locals: {conversation: c}
+        else
+          redirect_to conversation_url(c)
+        end
       rescue
         flash[:errors] = c.errors.full_messages
         redirect_to conversations_url
