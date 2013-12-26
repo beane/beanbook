@@ -1,15 +1,7 @@
 <article class="post">
   <header class="post-header">
     <% author = post.author %>
-    <%= render(partial: 'users/preview', locals: {user: author}) %>
-
-    <% if post.recipient && post.recipient != author %>
-
-    <div class="preview-name">
-      &nbsp→ <a href="<%= user_url(post.recipient) %>"><%= post.recipient.name %></a>
-    </div>
-
-    <% end %>
+    <%= render(partial: 'users/preview', locals: {user: author, post: post}) %>
   </header>
 
 
