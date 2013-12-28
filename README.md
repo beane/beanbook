@@ -20,11 +20,11 @@ This is a facebook clone - my final project for App Academy. It can be found [he
 - Photo tagging
 - Automatic notification
 - Messaging
+- Comments
 - Liking
 
 ## To do
-- Comments
-- JavaScriptify photo tagging, liking, comments, photo views, messaging
+- JavaScriptify notifications, photo tagging, comments, photo views, messaging
 - Auto refresh page for notifications
 - Email confirmation
 - Confirm password on sign up
