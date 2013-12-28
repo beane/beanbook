@@ -5,6 +5,11 @@
 
 /* likes */
 
+.likes {
+  padding: 15px 0;
+  width: 100%;
+}
+
 .unlike {
   display: none;
 }
@@ -15,4 +20,9 @@
 
 .likes.can-unlike .unlike {
   display: inline-block;
+}
+
+.likes p, .likes input[type="submit"] {
+  float: left;
+  padding-right: 10px;
 }
