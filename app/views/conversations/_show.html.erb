@@ -2,8 +2,7 @@
   <h2>Your Conversation with <%= (conversation.users - [current_user]).map(&:first_name).join(", ") %></h2>
   <ul class="messages">
     <% conversation.messages.each do |message| %>
-    <li><%= message.sender.name %>: <%= message.body %></li>
-      <!-- <li> <%= render partial: "users/preview", locals: {user: message.sender} %> <%= message.body %></li> -->
+    <li> <%= render partial: "users/preview", locals: {user: message.sender, post: Post.new} %> <%= message.body %></li>
     <% end %>
   </ul>
 

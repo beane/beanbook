@@ -16,11 +16,11 @@
   border-bottom: 1px dotted #ccc;
 }
 
-.post-header .preview-photo {
+.preview-photo {
   float: left;
 }
 
-.post-header .preview-name {
+.preview-name {
   float: left;
   padding: 30px;
 }
@@ -36,4 +36,8 @@
 .post-page-link, .edit-link, .post-footer input[type="submit"] {
   float: left;
   padding-right: 10px;
+}
+
+h3 {
+  display: inline;
 }

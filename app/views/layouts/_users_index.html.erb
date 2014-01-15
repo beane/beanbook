@@ -21,7 +21,7 @@
     <% end %>
 
     <li class="clearfix">
-        <%= render(partial: 'users/preview', locals: {user: user}) %>
+        <%= render(partial: 'users/preview', locals: {user: user, post: Post.new}) %>
         <span><%= button %></span>
         <span><%= other_button %></span>
     </li>

@@ -4,7 +4,7 @@
 <% object.tagged_users.each do |user| %>
 
   <li class="clearfix">
-    <%= render(partial: 'users/preview', locals: {user: user}) %>
+    <%= render(partial: 'users/preview', locals: {user: user, post: Post.new}) %>
     <% tag = Tag.find_by_taggable_type_and_taggable_id_and_taggee_id(params["controller"].capitalize.singularize, params["id"].to_i, current_user.id) %>
     <% if user.tags.include?(tag) %>
       <%= button_to "Remove Tag", user_tag_url(params[:user_id], tag), method: :delete %>
