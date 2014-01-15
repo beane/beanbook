@@ -9,7 +9,7 @@
 <body>
 
 <header class="header clearfix">
-  <h1 class="logo"><a href="<%= root_url %>" data-remote="true">BeanBook</a></h1>
+  <h1 class="logo"><a href="<%= root_url %>">BeanBook</a></h1>
   <nav><%= render 'layouts/user-data' %></nav>
 </header>
 
@@ -47,7 +47,8 @@
     $(".sidebar").on("ajax:success", "a", function(event, data) {
       $(".content").html(data);
     });
-
+    
+    $(".logo a").off();
   });
 
 </script>
