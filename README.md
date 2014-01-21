@@ -1,5 +1,9 @@
 # BeanBook
 ## Introduction
+Please be aware that this is a work in progress. I know that the front end doesn't look great right now - I'm working on it.
+
+Feel free to take at a look at my code, though. I'm proud of what I've written even if it isn't complete.
+
 This is a facebook clone - my final project for App Academy. It can be found [here](http://beanbook.herokuapp.com).
 
 ## Technologies
